@@ -1,5 +1,6 @@
 # forked from https://bitbucket.org/marcusva/py-sdl2 (which has public-domain license)
-# Michael Hirsch May 2014
+# The MIT License (MIT)
+# Copyright (c) 2014 Michael Hirsch
 # reference: http://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm
 # I have corrected errors in the cohensutherland code and compared cohensutherland with Matlab polyxpoly() results.
 

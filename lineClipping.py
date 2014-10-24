@@ -28,7 +28,7 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2,dbglvl=0):
         elif xa > xmax:
             p |= RIGHT
 
-        # consider y    
+        # consider y
         if ya < ymin:
             p |= LOWER # bitwise OR
         elif ya > ymax:
@@ -40,14 +40,13 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2,dbglvl=0):
     k2 = _getclip(x2, y2,dbglvl)
 
 # examine non-trivially outside points
-    i = 0
     while (k1 | k2) != 0: # if both points are inside box (0000) , ACCEPT trivial whole line in box
 
         # if line trivially outside window, REJECT
         if (k1 & k2) != 0:
             if dbglvl>1: print('  REJECT trivially outside box')
             return None, None, None, None
-            
+
         #non-trivial case, at least one point outside window
         opt = k1 or k2 # take first non-zero point, short circuit logic
         if opt & UPPER:
@@ -63,7 +62,7 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2,dbglvl=0):
             y = y1 + (y2 - y1) * (1.0 * (xmin - x1)) / (x2 - x1)
             x = xmin
         else: raise RuntimeError('Undefined clipping state')
-            
+
         if opt == k1:
             x1, y1 = x, y
             k1 = _getclip(x1, y1,dbglvl)

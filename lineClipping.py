@@ -72,3 +72,15 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2,dbglvl=0):
             x2, y2 = x, y
             k2 = _getclip(x2, y2,dbglvl)
     return x1, y1, x2, y2
+
+if __name__ == '__main__': #test case
+    from numpy.testing import assert_array_almost_equal
+    '''
+    make box with corners LL/UR (1,3) (4,5)
+    and line segment with ends (0,0) (4,6)
+    '''
+    x1, y1, x2, y2 = cohensutherland(1,   5, 4, 3,
+                                     0,   0, 4, 6)
+
+    assert_array_almost_equal([x1,y1,x2,y2],[2,3,3.3333333333333,5])
+    exit(0)

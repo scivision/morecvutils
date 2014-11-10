@@ -8,9 +8,17 @@ before_install:
  - ./miniconda.sh -b
  - export PATH=/home/travis/miniconda/bin:$PATH
  - conda update --yes conda
+ - pip install coveralls
 
 install:
  - conda install --yes python=$TRAVIS_PYTHON_VERSION numpy
 
 script:  
- python lineClipping.py
+ - if [[ $CONDA == python=2.7* ]]; then
+		coverage lineClipping.py
+	else
+		python lineClipping.py
+	fi
+
+after_success:
+ - coveralls

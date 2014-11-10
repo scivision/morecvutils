@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import division
 '''
  forked from https://bitbucket.org/marcusva/py-sdl2 (which has public-domain license)

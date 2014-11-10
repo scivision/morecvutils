@@ -1,10 +1,12 @@
-# forked from https://bitbucket.org/marcusva/py-sdl2 (which has public-domain license)
-# The MIT License (MIT)
-# Copyright (c) 2014 Michael Hirsch
-# reference: http://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm
-# I have corrected errors in the cohensutherland code and compared cohensutherland with Matlab polyxpoly() results.
-
-def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2,dbglvl=0):
+from __future__ import division
+'''
+ forked from https://bitbucket.org/marcusva/py-sdl2 (which has public-domain license)
+ The MIT License (MIT)
+ Copyright (c) 2014 Michael Hirsch
+ reference: http://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm
+ I have corrected errors in the cohensutherland code and compared cohensutherland with Matlab polyxpoly() results.
+'''
+def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2):
     """Clips a line to a rectangular area.
 
     This implements the Cohen-Sutherland line clipping algorithm.  xmin,
@@ -18,8 +20,8 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2,dbglvl=0):
     """
     INSIDE,LEFT, RIGHT, LOWER, UPPER = 0,1, 2, 4, 8
 
-    def _getclip(xa, ya,dbglvl=0):
-        if dbglvl>1: print('point: '),; print(xa,ya)
+    def _getclip(xa, ya):
+        #if dbglvl>1: print('point: '),; print(xa,ya)
         p = INSIDE  #default is inside
 
         # consider x
@@ -36,41 +38,41 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2,dbglvl=0):
         return p
 
 # check for trivially outside lines
-    k1 = _getclip(x1, y1,dbglvl)
-    k2 = _getclip(x2, y2,dbglvl)
+    k1 = _getclip(x1, y1)
+    k2 = _getclip(x2, y2)
 
 # examine non-trivially outside points
     while (k1 | k2) != 0: # if both points are inside box (0000) , ACCEPT trivial whole line in box
 
         # if line trivially outside window, REJECT
         if (k1 & k2) != 0:
-            if dbglvl>1: print('  REJECT trivially outside box')
+            #if dbglvl>1: print('  REJECT trivially outside box')
             return None, None, None, None
 
         #non-trivial case, at least one point outside window
         opt = k1 or k2 # take first non-zero point, short circuit logic
         if opt & UPPER:
-            x = x1 + (x2 - x1) * (1.0 * (ymax - y1)) / (y2 - y1) #1.0 forces float in divide
+            x = x1 + (x2 - x1) * (ymax - y1) / (y2 - y1)
             y = ymax
         elif opt & LOWER:
-            x = x1 + (x2 - x1) * (1.0 * (ymin - y1)) / (y2 - y1)
+            x = x1 + (x2 - x1) * (ymin - y1) / (y2 - y1)
             y = ymin
         elif opt & RIGHT:
-            y = y1 + (y2 - y1) * (1.0 * (xmax - x1)) / (x2 - x1)
+            y = y1 + (y2 - y1) * (xmax - x1) / (x2 - x1)
             x = xmax
         elif opt & LEFT:
-            y = y1 + (y2 - y1) * (1.0 * (xmin - x1)) / (x2 - x1)
+            y = y1 + (y2 - y1) * (xmin - x1) / (x2 - x1)
             x = xmin
         else: raise RuntimeError('Undefined clipping state')
 
         if opt == k1:
             x1, y1 = x, y
-            k1 = _getclip(x1, y1,dbglvl)
-            if dbglvl>1: print('checking k1: ' + str(x) + ',' + str(y) + '    ' + str(k1))
+            k1 = _getclip(x1, y1)
+            #if dbglvl>1: print('checking k1: ' + str(x) + ',' + str(y) + '    ' + str(k1))
         elif opt == k2:
-            if dbglvl>1: print('checking k2: ' + str(x) + ',' + str(y) + '    ' + str(k2))
+            #if dbglvl>1: print('checking k2: ' + str(x) + ',' + str(y) + '    ' + str(k2))
             x2, y2 = x, y
-            k2 = _getclip(x2, y2,dbglvl)
+            k2 = _getclip(x2, y2)
     return x1, y1, x2, y2
 
 if __name__ == '__main__': #test case
@@ -83,4 +85,3 @@ if __name__ == '__main__': #test case
                                      0,   0, 4, 6)
 
     assert_array_almost_equal([x1,y1,x2,y2],[2,3,3.3333333333333,5])
-    exit(0)

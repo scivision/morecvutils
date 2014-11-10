@@ -8,7 +8,7 @@ before_install:
  - ./miniconda.sh -b
  - export PATH=/home/travis/miniconda/bin:$PATH
  - conda update --yes conda
- - pip install coveralls
+ - pip -q install coveralls
 
 install:
  - conda install --yes python=$TRAVIS_PYTHON_VERSION numpy

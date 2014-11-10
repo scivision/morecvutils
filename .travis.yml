@@ -15,9 +15,9 @@ install:
 
 script:  
  - if [[ $CONDA == python=2.7* ]]; then
-		coverage lineClipping.py
+		coverage lineClipping.py;
 	else
-		python lineClipping.py
+		python lineClipping.py;
 	fi
 
 after_success:

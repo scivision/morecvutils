@@ -1,12 +1,17 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 from __future__ import division
+#nan = float('nan')
+#from numba import jit
 '''
  forked from https://bitbucket.org/marcusva/py-sdl2 (which has public-domain license)
  The MIT License (MIT)
  Copyright (c) 2014 Michael Hirsch
+Nov 2014: returning NaN instead of None for Numba compatability
+(Numba 0.15.1 can't do "is not None")
  reference: http://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm
  I have corrected errors in the cohensutherland code and compared cohensutherland with Matlab polyxpoly() results.
 '''
+#@jit
 def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2):
     """Clips a line to a rectangular area.
 
@@ -42,15 +47,18 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2):
     k1 = _getclip(x1, y1)
     k2 = _getclip(x2, y2)
 
-# examine non-trivially outside points
+#%% examine non-trivially outside points
+    #bitwise OR |
     while (k1 | k2) != 0: # if both points are inside box (0000) , ACCEPT trivial whole line in box
 
         # if line trivially outside window, REJECT
-        if (k1 & k2) != 0:
+        if (k1 & k2) != 0: #bitwise AND &
             #if dbglvl>1: print('  REJECT trivially outside box')
+            #return nan, nan, nan, nan
             return None, None, None, None
 
         #non-trivial case, at least one point outside window
+        # this is not a bitwise or, it's the word "or"
         opt = k1 or k2 # take first non-zero point, short circuit logic
         if opt & UPPER:
             x = x1 + (x2 - x1) * (ymax - y1) / (y2 - y1)
@@ -64,7 +72,8 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2):
         elif opt & LEFT:
             y = y1 + (y2 - y1) * (xmin - x1) / (x2 - x1)
             x = xmin
-        else: raise RuntimeError('Undefined clipping state')
+        else:
+            raise RuntimeError('Undefined clipping state')
 
         if opt == k1:
             x1, y1 = x, y

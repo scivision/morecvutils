@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 from __future__ import division
-#nan = float('nan')
 #from numba import jit
 '''
  forked from https://bitbucket.org/marcusva/py-sdl2 (which has public-domain license)
  The MIT License (MIT)
  Copyright (c) 2014 Michael Hirsch
-Nov 2014: returning NaN instead of None for Numba compatability
-(Numba 0.15.1 can't do "is not None")
  reference: http://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm
- I have corrected errors in the cohensutherland code and compared cohensutherland with Matlab polyxpoly() results.
+ * I have corrected errors in the cohensutherland code and compared cohensutherland with Matlab polyxpoly() results.
+ * The best way to Numba JIT this would probably be in the function calling this, to include the loop itself 
+   inside the jit decoration.
 '''
 #@jit
 def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2):

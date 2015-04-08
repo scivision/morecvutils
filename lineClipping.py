@@ -7,7 +7,7 @@ from __future__ import division
  Copyright (c) 2014 Michael Hirsch
  reference: http://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm
  * I have corrected errors in the cohensutherland code and compared cohensutherland with Matlab polyxpoly() results.
- * The best way to Numba JIT this would probably be in the function calling this, to include the loop itself 
+ * The best way to Numba JIT this would probably be in the function calling this, to include the loop itself
    inside the jit decoration.
 '''
 #@jit

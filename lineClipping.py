@@ -71,7 +71,7 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2):
         elif opt & LEFT:
             y = y1 + (y2 - y1) * (xmin - x1) / (x2 - x1)
             x = xmin
-        else: # pragma: no cover
+        else:
             raise RuntimeError('Undefined clipping state')
 
         if opt == k1:

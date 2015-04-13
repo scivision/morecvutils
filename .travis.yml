@@ -9,10 +9,10 @@ install:
 
 script:  
  - if [[ $CONDA == python=2.7* ]]; then
-        echo "running coveralls"
-        coverage run lineClipping.py
+        echo "running coverage";
+        coverage run lineClipping.py;
    else
-        python lineClipping.py
+        python lineClipping.py;
    fi
 
 after_success:

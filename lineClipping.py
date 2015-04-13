@@ -71,7 +71,7 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2):
         elif opt & LEFT:
             y = y1 + (y2 - y1) * (xmin - x1) / (x2 - x1)
             x = xmin
-        else:
+        else: # pragma: no cover
             raise RuntimeError('Undefined clipping state')
 
         if opt == k1:
@@ -90,15 +90,11 @@ if __name__ == '__main__': #test case
     make box with corners LL/UR (1,3) (4,5)
     and line segment with ends (0,0) (4,6)
     '''
-#%% LL to UR test
+#%% LOWER to UPPER test
     x1, y1, x2, y2 = cohensutherland(1,  5, 4, 3,
                                      0,  0, 4, 6)
 
     assert_array_almost_equal([x1,y1,x2,y2],[2, 3, 3.3333333333333,5])
-#%% LR to UL test
-    x1,y1,x2,y2 = cohensutherland(1,5,4,3,
-                                  5,0,0,6)
-    assert_array_almost_equal([x1,y1,x2,y2],[2.5, 3, 1, 4.8])
 #%% no intersection test
     x1,y1,x2,y2 = cohensutherland(1,5,  4,3,
                                   0,0.1,0,0.1)

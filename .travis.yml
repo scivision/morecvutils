@@ -15,4 +15,4 @@ script:
    fi
 
 after_success:
- - coveralls
+ - coveralls debug

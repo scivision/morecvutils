@@ -103,3 +103,7 @@ if __name__ == '__main__': #test case
     x1,y1,x2,y2 = cohensutherland(1,5,  4,3,
                                   0,0.1,0,0.1)
     assert x1==y1==x2==y2==None
+#%% left to right test
+    x1,y1,x2,y2 = cohensutherland(1,5,4,3,
+                                  0,4,5,4)
+    assert_array_almost_equal([x1,y1,x2,y2],[1, 4, 4, 4])

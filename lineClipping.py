@@ -102,3 +102,4 @@ if __name__ == '__main__': #test case
 #%% no intersection test
     x1,y1,x2,y2 = cohensutherland(1,5,  4,3,
                                   0,0.1,0,0.1)
+    assert x1==y1==x2==y2==None

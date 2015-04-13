@@ -98,4 +98,7 @@ if __name__ == '__main__': #test case
 #%% LR to UL test
     x1,y1,x2,y2 = cohensutherland(1,5,4,3,
                                   5,0,0,6)
-    assert_array_almost_equal([x1,y1,x2,y2],[2.5, 1, 3, 4.8])
+    assert_array_almost_equal([x1,y1,x2,y2],[2.5, 3, 1, 4.8])
+#%% no intersection test
+    x1,y1,x2,y2 = cohensutherland(1,5,  4,3,
+                                  0,0.1,0,0.1)

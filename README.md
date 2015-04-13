@@ -1,6 +1,7 @@
 [![Health](https://landscape.io/github/scienceopen/cv-utils/master/landscape.png)](https://landscape.io/github/scienceopen/cv-utils/master)
 [![Build Status](https://travis-ci.org/scienceopen/cv-utils.svg)](https://travis-ci.org/scienceopen/cv-utils)
-[![Coverage Status](https://coveralls.io/repos/scienceopen/cv-utils/badge.svg)](https://coveralls.io/r/scienceopen/cv-utils)
+[![Coverage Status](https://coveralls.io/repos/scienceopen/cv-utils/badge.svg?branch=master)](https://coveralls.io/r/scienceopen/cv-utils?branch=master)
+
 cv-utils
 ========
 

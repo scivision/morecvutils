@@ -1,8 +1,8 @@
-[![Health](https://landscape.io/github/scienceopen/cv-utils/master/landscape.png)](https://landscape.io/github/scienceopen/cv-utils/master)
-[![Build Status](https://travis-ci.org/scienceopen/cv-utils.svg)](https://travis-ci.org/scienceopen/cv-utils)
-[![Coverage Status](https://coveralls.io/repos/scienceopen/cv-utils/badge.svg?branch=master)](https://coveralls.io/r/scienceopen/cv-utils?branch=master)
+[![Health](https://landscape.io/github/scienceopen/CVutils/master/landscape.png)](https://landscape.io/github/scienceopen/CVutils/master)
+[![Build Status](https://travis-ci.org/scienceopen/CVutils.svg)](https://travis-ci.org/scienceopen/CVutils)
+[![Coverage Status](https://coveralls.io/repos/scienceopen/CVutils/badge.svg?branch=master)](https://coveralls.io/r/scienceopen/CVutils?branch=master)
 
-cv-utils
+CVutils
 ========
 
 Misc. algorithms useful for computer vision

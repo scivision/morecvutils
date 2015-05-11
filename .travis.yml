@@ -10,9 +10,9 @@ install:
 script:  
  - if [[ $(python --version 2>&1) == "Python 2.7"* ]] ; then
         echo "running coverage";
-        coverage run lineClipping.py;
+        coverage run test.py;
    else
-        python lineClipping.py;
+        python test.py;
    fi
 
 after_success:

@@ -9,8 +9,8 @@ def draw_flow(img, flow, step=16,dtype=uint8):
     this came from opencv/examples directory
     another way: http://docs.opencv.org/trunk/doc/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html
     """
-    maxval=iinfo(img.dtype).max     
-    
+    maxval=iinfo(img.dtype).max
+
     #scaleFact = 1. #arbitary factor to make flow visible
     canno = (0, maxval, 0)  # green color
     h, w = img.shape[:2]
@@ -27,16 +27,15 @@ def draw_flow(img, flow, step=16,dtype=uint8):
         cv2.circle(vis, center=(x1, y1), radius=1, color=canno, thickness=-1)
     return vis
 
-def draw_hsv(mag,ang,fn=None):   
+def draw_hsv(mag,ang,dtype=uint8,fn=None):
     """
     mag must be uint8, uint16, uint32 and 2-D
     ang is in radians (float)
     """
-    dtype = mag.dtype
     assert mag.shape == ang.shape
     assert mag.ndim == 2
     maxval=iinfo(dtype).max
-    
+
     hsv = dstack(((degrees(ang)/2).astype(dtype), #/2 to keep less than 255
                   ones_like(mag)*maxval,  #maxval must be after in 1-D case
                   cv2.normalize(mag, alpha=0, beta=maxval, norm_type=cv2.NORM_MINMAX)))
@@ -45,9 +44,9 @@ def draw_hsv(mag,ang,fn=None):
     if fn is not None:
         print('writing ' + fn)
         cv2.imwrite(fn,rgb)
-    
+
     return rgb, hsv
-    
+
 def flow2magang(flow,dtype=uint8):
     """
     flow dimensions y,x,2  3-D.  flow[...,0] is real, flow[...,1] is imag
@@ -62,8 +61,8 @@ if __name__ == '__main__':
                   [[123,pi/2],
                   [48,pi]]])
 
-    mag, ang = flow2magang(flow,uint8)    
-    
+    mag, ang = flow2magang(flow,uint8)
+
     rgb,hsv=draw_hsv(mag, ang)
     assert hsv[0,0,2] == 22
     assert rgb[1,0,2] == 239

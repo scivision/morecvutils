@@ -35,7 +35,7 @@ def draw_hsv(mag,ang,fn=None):
     dtype = mag.dtype
     assert mag.shape == ang.shape
     assert mag.ndim == 2
-    maxval=iinfo(mag.dtype).max
+    maxval=iinfo(dtype).max
     
     hsv = dstack(((degrees(ang)/2).astype(dtype), #/2 to keep less than 255
                   ones_like(mag)*maxval,  #maxval must be after in 1-D case

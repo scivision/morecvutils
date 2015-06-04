@@ -3,12 +3,10 @@
 Michael Hirsch
 Example calculations of optical flow, starting with Horn Schunk Optical Flow using OpenCV
 """
-
-import cv2
 from cv2 import cv
 from numpy import asarray,dstack,uint8
 
-def optflowHornSchunk(new,ref,uv,smoothing):
+def optflowHornSchunk(new,ref,uv,smoothing=0.01):
     """
     http://docs.opencv.org/modules/legacy/doc/motion_analysis.html
     ***************************
@@ -17,10 +15,10 @@ def optflowHornSchunk(new,ref,uv,smoothing):
     *****************************
     """
     cvref = cv.fromarray(ref)
-    cvgray = cv.fromarray(new)
+    cvnew = cv.fromarray(new)
     #result is placed in u,v
     # matlab vision.OpticalFlow Horn-Shunck has default maxiter=10, terminate=eps, smoothness=1
-    cv.CalcOpticalFlowHS(cvref, cvgray, False, uv[0], uv[1],
+    cv.CalcOpticalFlowHS(cvref, cvnew, False, uv[0], uv[1],
                          smoothing,
                          (cv.CV_TERMCRIT_ITER | cv.CV_TERMCRIT_EPS, 8, 0.1))
 
@@ -31,9 +29,13 @@ def setupuv(xpix,ypix):
     """
     Horn Schunck legacy OpenCV function requires we use these old-fashioned cv matrices, not numpy array
     """
-    u =   cv.CreateMat(ypix, xpix, cv.CV_32FC1)
-    v =   cv.CreateMat(ypix, xpix, cv.CV_32FC1)
+    u = cv.CreateMat(ypix, xpix, cv.CV_32FC1)
+    v = cv.CreateMat(ypix, xpix, cv.CV_32FC1)
     return (u, v)
+
+def calcofhs(new,ref,xpix,ypix,smoothing):
+    uv = setupuv(xpix,ypix)
+    return optflowHornSchunk(new,ref,uv,smoothing)
 #%% demo
 if __name__ == '__main__':
     from numpy.random import rand

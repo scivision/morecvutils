@@ -45,7 +45,7 @@ def draw_hsv(mag,ang,dtype=uint8,fn=None):
         print('writing ' + fn)
         cv2.imwrite(fn,rgb)
 
-    return rgb, hsv
+    return rgb#, hsv
 
 def flow2magang(flow,dtype=uint8):
     """

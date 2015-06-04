@@ -19,8 +19,12 @@ def draw_flow(img, flow, step=16,dtype=uint8):
     #create line endpoints
     lines = vstack([x, y, (x+fx), (y+fy)]).T.reshape(-1, 2, 2)
     lines = int32(lines + 0.5)
-    #create image and draw line
-    vis = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+    #create image
+    if img.ndim==2: #assume gray
+        vis = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+    else: #already RGB
+        vis = img
+    #draw line
     cv2.polylines(vis, lines, isClosed=False, color=canno, thickness=1, lineType=8)
     #draw filled green circles
     for (x1, y1), (x2, y2) in lines:

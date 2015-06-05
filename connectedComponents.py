@@ -21,7 +21,7 @@ def doblob(morphed,blobdet,img):
                 fontFace=cv2.FONT_HERSHEY_PLAIN, fontScale=2,
                 color=(0,255,0), thickness=2)
 
-    return final
+    return final,nkey
 
 def setupblob(minarea, maxarea, mindist):
     blobparam = cv2.SimpleBlobDetector_Params()

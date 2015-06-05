@@ -4,7 +4,7 @@ try: #OpenCV 2.4
 except ImportError: #OpenCV 3
     from cv2 import SimpleBlobDetector_create as SimpleBlobDetector
 
-def doblob(morphed,blobdet,img):
+def doblob(morphed,blobdet,img,anno=True):
     """
     img: can be RGB (MxNx3) or gray (MxN)
     http://docs.opencv.org/master/modules/features2d/doc/drawing_function_of_keypoints_and_matches.html
@@ -16,8 +16,9 @@ def doblob(morphed,blobdet,img):
 
     final = cv2.drawKeypoints(img, keypoints, outImage=final,
                               flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-#%% plot count of blobs (comment out if you don't want it)
-    cv2.putText(final, text=str(nkey), org=(int(img.shape[1]*.9),25),
+#%% plot count of blobs
+    if anno:
+        cv2.putText(final, text=str(nkey), org=(int(img.shape[1]*.9),25),
                 fontFace=cv2.FONT_HERSHEY_PLAIN, fontScale=2,
                 color=(0,255,0), thickness=2)
 

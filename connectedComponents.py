@@ -3,6 +3,7 @@ try: #OpenCV 2.4
     from cv2 import SimpleBlobDetector as SimpleBlobDetector
 except ImportError: #OpenCV 3
     from cv2 import SimpleBlobDetector_create as SimpleBlobDetector
+from numpy import asarray
 
 def doblob(morphed,blobdet,img,anno=True):
     """
@@ -12,6 +13,7 @@ def doblob(morphed,blobdet,img,anno=True):
     """
     keypoints = blobdet.detect(morphed)
     nkey = len(keypoints)
+    kpsize = asarray([k.size for k in keypoints])
     final = img.copy() # is the .copy necessary?
 
     final = cv2.drawKeypoints(img, keypoints, outImage=final,
@@ -22,7 +24,7 @@ def doblob(morphed,blobdet,img,anno=True):
                 fontFace=cv2.FONT_HERSHEY_PLAIN, fontScale=2,
                 color=(0,255,0), thickness=2)
 
-    return final,nkey
+    return final,nkey,kpsize
 
 def setupblob(minarea, maxarea, mindist):
     blobparam = cv2.SimpleBlobDetector_Params()

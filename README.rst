@@ -17,10 +17,10 @@ Misc. algorithms useful for computer vision
 
 ``lineClipping.py``  Cohen-Sutherland line clipping algorithm for Python. Input scalars, output intersection length, or ``None`` if no intersection.
 
-``cv2draw.py`` functions
-
-``draw_flow()`` given a 2-D complex Numpy array of optical flow ``flow``, draw flow vectors with arrows
-  ``draw_hsv()`` make a colored HSV image corresponding to flow direction and intensity at each point
+``cv2draw.py``  
+ ``draw_flow()`` given a 2-D complex Numpy array of optical flow ``flow``, draw flow vectors with arrows
+ 
+ ``draw_hsv()`` make a colored HSV image corresponding to flow direction and intensity at each point
   
 ``connectedComponents.py`` given a binary image ``morphed`` and the ``blobdet`` from ``setupblob()``, along with ``img``, do connected components analysis
 

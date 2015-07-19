@@ -25,25 +25,27 @@ def optflowHornSchunk(new,ref,uv,smoothing=0.01):
     # reshape to numpy float32, xpix x ypix x 2
     return dstack((asarray(uv[0]), asarray(uv[1])))
 
-def setupuv(xpix,ypix):
+def setupuv(rc):
     """
     Horn Schunck legacy OpenCV function requires we use these old-fashioned cv matrices, not numpy array
     """
-    u = cv.CreateMat(ypix, xpix, cv.CV_32FC1)
-    v = cv.CreateMat(ypix, xpix, cv.CV_32FC1)
+    (r,c) = rc
+    u = cv.CreateMat(r, c, cv.CV_32FC1)
+    v = cv.CreateMat(r, c, cv.CV_32FC1)
     return (u, v)
 
-def calcofhs(new,ref,xpix,ypix,smoothing):
-    uv = setupuv(xpix,ypix)
+def calcofhs(new,ref,smoothing):
+    uv = setupuv(new.shape)
     return optflowHornSchunk(new,ref,uv,smoothing)
 #%% demo
 if __name__ == '__main__':
     from numpy.random import rand
-    xpix,ypix = 512,512
-    uv = setupuv(xpix,ypix)
-    old = (rand(ypix,xpix)*255).astype(uint8)
+    rc = (512,512)
+    r,c=rc
+    uv = setupuv(rc)
+    old = (rand(r,c)*255).astype(uint8)
 
     for i in range(100):
-        new = (rand(ypix,xpix)*255).astype(uint8)
+        new = (rand(r,c)*255).astype(uint8)
         flow = optflowHornSchunk(new,old,uv,smoothing=0.01)
         old = new.copy()

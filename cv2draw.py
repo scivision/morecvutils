@@ -67,6 +67,6 @@ if __name__ == '__main__':
 
     mag, ang = flow2magang(flow,uint8)
 
-    rgb,hsv=draw_hsv(mag, ang)
-    assert hsv[0,0,2] == 22
+    rgb=draw_hsv(mag, ang)
+
     assert rgb[1,0,2] == 239

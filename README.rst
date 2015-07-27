@@ -13,7 +13,9 @@
 CVutils
 ========
 
-Misc. algorithms useful for computer vision
+Misc. algorithms useful for computer vision.
+
+`OpenCV 2.4 and 3.0 Installation procedures for Linux and Windows <https://scivision.co/category/opencv/>`_
 
 ``lineClipping.py``  Cohen-Sutherland line clipping algorithm for Python. Input scalars, output intersection length, or ``None`` if no intersection.
 

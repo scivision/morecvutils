@@ -24,4 +24,4 @@ Misc. algorithms useful for computer vision
   
 ``connectedComponents.py`` given a binary image ``morphed`` and the ``blobdet`` from ``setupblob()``, along with ``img``, do connected components analysis
 
-``calcOptFlow.py`` using Horn-Schunck optical flow estimation with OpenCV in Python. Not so obvious from the docs, and with notes on how to make this match Matlab's ``vision.opticalFlowHS`` method.
+``calcOptFlow.py`` using Horn-Schunck optical flow estimation with OpenCV in Python. Not so obvious from the docs, and with notes on how to make this `match Matlab's ``vision.opticalFlowHS`` method <https://scivision.co/opencv-cv-calcopticalflowhs-horn-schunck-smoothness-lambda-parameter/>`_.

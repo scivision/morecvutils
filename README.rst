@@ -15,6 +15,17 @@ CVutils
 
 Misc. algorithms useful for computer vision.
 
+Install
+=======
+from Terminal, type::
+   
+   git clone --depth 1 https://github.com/scienceopen/CVutils/
+   python setup.py develop
+
+
+Functions
+=========
+
 `OpenCV 2.4 and 3.0 Installation procedures for Linux and Windows <https://scivision.co/category/opencv/>`_
 
 ``lineClipping.py``  Cohen-Sutherland line clipping algorithm for Python. Input scalars, output intersection length, or ``None`` if no intersection.

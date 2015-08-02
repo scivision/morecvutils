@@ -12,6 +12,6 @@ setup(name='CVutils',
 	  author='Michael Hirsch',
 	  author_email='hirsch617@gmail.com',
 	  url='https://github.com/scienceopen/CVutils',
-	  install_requires=['numba','numpy','enum34'],
+	  install_requires=['numpy'],
       packages=['CVutils'],
 	  )

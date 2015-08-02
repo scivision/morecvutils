@@ -21,7 +21,7 @@ install:
    pip -q install coveralls;
   fi
  - conda install --yes --file requirements.txt
- - sudo apt-get install python-opencv
+ - sudo apt-get update && sudo install python-opencv
  - python setup.py develop
 
 script:

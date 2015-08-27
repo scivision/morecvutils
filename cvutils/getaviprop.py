@@ -5,7 +5,10 @@ gets basic info about AVI file using OpenCV
 input: filename or cv2.Capture
 """
 import cv2
-from cv2 import cv
+try:
+    from cv2 import cv
+except:
+    import cv2 as cv #FIXME for OPENCV 3
 from numpy import int64
 from warnings import warn
 from six import string_types,integer_types

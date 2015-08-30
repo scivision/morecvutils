@@ -1,6 +1,6 @@
 from numpy.testing import assert_array_almost_equal
 #
-from CVutils.lineClipping import cohensutherland
+from cvutils.lineClipping import cohensutherland
 
 def test_lineclip():
     """

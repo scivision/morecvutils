@@ -11,28 +11,38 @@
 CVutils
 ========
 
+:Author: Michael Hirsch
+:License: MIT
+:Prereq: `OpenCV 2.4 or 3.0 <https://scivision.co/category/opencv/>`_
+
+.. contents::
+
 Misc. algorithms useful for computer vision.
 
 Install
 =======
-from Terminal, type::
+
+`Requires OpenCV 2.4 or 3.0 <https://scivision.co/category/opencv/>`_
+
+.. code:: bash
    
-   git clone --depth 1 https://github.com/scienceopen/CVutils/
-   python setup.py develop
+   $ git clone --depth 1 https://github.com/scienceopen/CVutils/
+   $ cd CVutils   
+   $ python setup.py develop
 
 
 Functions
 =========
 
-`OpenCV 2.4 and 3.0 Installation procedures for Linux and Windows <https://scivision.co/category/opencv/>`_
+========================= ======================
+function                  description
+========================= ======================
+lineClipping.py            Cohen-Sutherland line clipping algorithm for Python. Input scalars, output intersection length, or ``None`` if no intersection.
 
-``lineClipping.py``  Cohen-Sutherland line clipping algorithm for Python. Input scalars, output intersection length, or ``None`` if no intersection.
-
-``cv2draw.py``  
- ``draw_flow()`` given a 2-D complex Numpy array of optical flow ``flow``, draw flow vectors with arrows
- 
- ``draw_hsv()`` make a colored HSV image corresponding to flow direction and intensity at each point
+draw_flow()                given a 2-D complex Numpy array of optical flow ``flow``, draw flow vectors with arrows
+draw_hsv()                 make a colored HSV image corresponding to flow direction and intensity at each point
   
-``connectedComponents.py`` given a binary image ``morphed`` and the ``blobdet`` from ``setupblob()``, along with ``img``, do connected components analysis
+connectedComponents.py     given a binary image ``morphed`` and the ``blobdet`` from ``setupblob()``, along with ``img``, do connected components analysis
 
-``calcOptFlow.py`` using Horn-Schunck optical flow estimation with OpenCV in Python. Not so obvious from the docs, and with notes on how to make this `match Matlab's vision.opticalFlowHS method <https://scivision.co/opencv-cv-calcopticalflowhs-horn-schunck-smoothness-lambda-parameter/>`_.
+calcOptFlow.py             using Horn-Schunck optical flow estimation with OpenCV in Python. Not so obvious from the docs, and with notes on how to make this `match Matlab's vision.opticalFlowHS method <https://scivision.co/opencv-cv-calcopticalflowhs-horn-schunck-smoothness-lambda-parameter/>`_.
+========================= ======================

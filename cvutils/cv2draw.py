@@ -1,4 +1,4 @@
-from __future__ import division
+from __future__ import division,absolute_import
 import cv2
 from numpy import (dstack,degrees,pi,array,ones_like,arctan2,hypot,mgrid,vstack,
                     uint8,int32,iinfo)

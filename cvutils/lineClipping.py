@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from __future__ import division
+from __future__ import division,absolute_import
 #from numba import jit
 '''
  forked from https://bitbucket.org/marcusva/py-sdl2 (which has public-domain license)

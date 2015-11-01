@@ -4,6 +4,7 @@ gets basic info about AVI file using OpenCV
 
 input: filename or cv2.Capture
 """
+from __future__ import division,absolute_import
 import cv2
 try:
     from cv2 import cv

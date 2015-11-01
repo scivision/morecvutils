@@ -1,8 +1,10 @@
 .. image:: https://landscape.io/github/scienceopen/CVutils/master/landscape.svg?style=flat
    :target: https://landscape.io/github/scienceopen/CVutils/master
    :alt: Code Health
+
 .. image:: https://coveralls.io/repos/scienceopen/CVutils/badge.svg?branch=master&service=github 
   :target: https://coveralls.io/github/scienceopen/CVutils?branch=master 
+
 .. image:: https://codeclimate.com/github/scienceopen/CVutils/badges/gpa.svg
   :target: https://codeclimate.com/github/scienceopen/CVutils
   :alt: Code Climate
@@ -24,11 +26,11 @@ Install
 
 `Requires OpenCV 2.4 or 3.0 <https://scivision.co/category/opencv/>`_
 
-.. code:: bash
+::
    
-   $ git clone --depth 1 https://github.com/scienceopen/CVutils/
-   $ cd CVutils   
-   $ python setup.py develop
+   git clone --depth 1 https://github.com/scienceopen/CVutils/
+   conda install --file requirements.txt
+   python setup.py develop
 
 
 Functions

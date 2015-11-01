@@ -1,3 +1,6 @@
+.. image:: https://travis-ci.org/scienceopen/CVutils.svg?branch=master
+    :target: https://travis-ci.org/scienceopen/CVutils
+
 .. image:: https://landscape.io/github/scienceopen/CVutils/master/landscape.svg?style=flat
    :target: https://landscape.io/github/scienceopen/CVutils/master
    :alt: Code Health

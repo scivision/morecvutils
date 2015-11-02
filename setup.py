@@ -11,6 +11,5 @@ setup(name='cvutils',
 	  long_description=long_description,
 	  author='Michael Hirsch',
 	  url='https://github.com/scienceopen/cvutils',
-	  install_requires=['numpy'],
            packages=['cvutils'],
 	  )

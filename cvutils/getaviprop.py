@@ -4,55 +4,54 @@ gets basic info about AVI file using OpenCV
 
 input: filename or cv2.Capture
 """
-from __future__ import division,absolute_import
+from pathlib2 import Path
 import cv2
 try:
     from cv2 import cv
 except:
-    import cv2 as cv #FIXME for OPENCV 3
-from numpy import int64
-from warnings import warn
+    pass #OpenCV 3
 from six import string_types,integer_types
-from os.path import isfile
+from struct import pack
+
 
 
 def getaviprop(f):
-    if isinstance(f,string_types): #assuming filename
-        if isfile(f):
-            v = cv2.VideoCapture(f)
-        else:
-            warn('{} does not exist'.format(f))
-            return (None,)*5
+    if isinstance(f,(string_types,Path)): #assuming filename
+        f = Path(f).expanduser()
+        v = cv2.VideoCapture(str(f))
+        if v is None:
+            raise TypeError('could not read {}'.format(f))
     else: #assuming cv2.VideoCapture object
         v=f
 
     if not v.isOpened():
-        warn('cannot read {}  probable codec issue'.format(f))
-        return (None,)*5
+        raise TypeError('cannot read {}  probable codec issue'.format(f))
 
-    nframe = int64(v.get(cv.CV_CAP_PROP_FRAME_COUNT))
-    xpix = int(v.get(cv.CV_CAP_PROP_FRAME_WIDTH))
-    ypix = int(v.get(cv.CV_CAP_PROP_FRAME_HEIGHT))
-    fps  = v.get(cv.CV_CAP_PROP_FPS)
-    codec= fourccint2ascii(int(v.get(cv.CV_CAP_PROP_FOURCC)))
-
-    if isinstance(f,string_types): #not if it was fed a capture!
+    try: #opencv 2.X
+        vidparam = {'nframe': int(v.get(cv.CV_CAP_PROP_FRAME_COUNT)),
+                    'xpix'  : int(v.get(cv.CV_CAP_PROP_FRAME_WIDTH)),
+                    'ypix'  : int(v.get(cv.CV_CAP_PROP_FRAME_HEIGHT)),
+                    'fps'   : v.get(cv.CV_CAP_PROP_FPS),
+                    'codec' : fourccint2ascii(int(v.get(cv.CV_CAP_PROP_FOURCC)))
+                    }
+    except NameError: #opencv 3.0
+        vidparam = {'nframe': int(v.get(cv2.CAP_PROP_FRAME_COUNT)),
+                    'xpix'  : int(v.get(cv2.CAP_PROP_FRAME_WIDTH)),
+                    'ypix'  : int(v.get(cv2.CAP_PROP_FRAME_HEIGHT)),
+                    'fps'   : v.get(cv2.CAP_PROP_FPS),
+                    'codec' : fourccint2ascii(int(v.get(cv2.CAP_PROP_FOURCC)))
+                    }
+    if isinstance(f,Path): #not if it was fed a capture!
         v.release()
 
-    return nframe,xpix,ypix,fps,codec
+    return vidparam
 
 def fourccint2ascii(fourcc_int):
     """
     useful for converting fourcc in integer form (32-bit int) to ASCII
     """
     assert isinstance(fourcc_int,integer_types)
-    fourcc_bin = bin(fourcc_int)
-    if len(fourcc_bin) != 32:
-        raise ValueError('len(fourcc_bin) = {}   may need zero padding'.format(len(fourcc_bin)))
-    fourcc = ''
-    for i in range(4):
-        fourcc += chr(int(fourcc_bin[i*8:(i+1)*8],2)).replace('\x00',' ')
-    return fourcc
+    return pack('<I',fourcc_int)
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
@@ -60,6 +59,5 @@ if __name__ == '__main__':
     p.add_argument('avifn',help='avi filename')
     p=p.parse_args()
 
-    nframe,xpix,ypix,fps,codec = getaviprop(p.avifn)
-    if nframe is not None:
-        print('{} has {} frames at {} fps, and {} x {} pixels, using the {} codec.'.format(p.avifn,nframe,fps,xpix,ypix,codec))
+    vidparam = getaviprop(p.avifn)
+    print(vidparam)

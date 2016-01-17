@@ -3,12 +3,12 @@
 from setuptools import setup
 import subprocess
 
-with open('README.rst') as f:
+with open('README.rst','r') as f:
 	long_description = f.read()
 
 setup(name='cvutils',
       version='0.1',
-	  description='OpenCV utilites for blob detection, optical flow plots, etc.',
+	  description='OpenCV utilities for blob detection, optical flow plots, etc.',
 	  long_description=long_description,
 	  author='Michael Hirsch',
 	  url='https://github.com/scienceopen/cvutils',

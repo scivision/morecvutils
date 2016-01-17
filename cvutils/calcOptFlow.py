@@ -4,7 +4,10 @@ Michael Hirsch
 Example calculations of optical flow, starting with Horn Schunk Optical Flow using OpenCV
 """
 from __future__ import division,absolute_import
-from cv2 import cv
+try:
+    from cv2 import cv
+except Exception:
+    pass
 from numpy import asarray,dstack,uint8
 
 def optflowHornSchunk(new,ref,uv,smoothing=0.01):

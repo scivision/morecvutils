@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from __future__ import division,absolute_import
+from __future__ import division
 #from numba import jit
 '''
  forked from https://bitbucket.org/marcusva/py-sdl2 (which has public-domain license)
@@ -59,7 +59,7 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2):
         #non-trivial case, at least one point outside window
         # this is not a bitwise or, it's the word "or"
         opt = k1 or k2 # take first non-zero point, short circuit logic
-        if opt & UPPER:
+        if opt & UPPER: #these are bitwise ANDS
             x = x1 + (x2 - x1) * (ymax - y1) / (y2 - y1)
             y = ymax
         elif opt & LOWER:

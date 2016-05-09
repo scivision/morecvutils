@@ -7,7 +7,7 @@ implicit none
 
     integer,parameter :: inside=0,left=1,right=2,lower=4,upper=8
     private
-    public:: sp,stdout,cohensutherland,assert,loop_cohensutherland
+    public:: sp,stdout,cohensutherland,assert_isclose,loop_cohensutherland
 
 contains
 
@@ -18,14 +18,12 @@ subroutine loop_cohensutherland(xmins,ymaxs,xmaxs,ymins,Np,x1,y1,x2,y2,length)
     real(sp),intent(in) :: xmins(Np),ymaxs(Np),xmaxs(Np),ymins(Np)
     
     real(sp),intent(inout):: x1,y1,x2,y2
-    real(sp),intent(out) :: length(Np)
-
+    real(sp),intent(out) :: length(Np) !length of each intersection line segment
+    
     integer i
     logical outside
 
     length = -1. !init
-
-
 
     do concurrent (i=1:Np)
         call cohensutherland(xmins(i), ymaxs(i),xmaxs(i),ymins(i),x1,y1,x2,y2,outside)
@@ -109,14 +107,11 @@ endif
 
 end function getclip
 
-subroutine assert(cond)
-    logical, intent(in) :: cond
-
-    if (.not. cond) then
-        write(stderr,*) 'assertion failed, halting test'
-        error stop
-    end if
-
-end subroutine assert
+elemental logical function assert_isclose(x1,x2)
+    real(sp),intent(in) :: x1,x2
+    real(sp),parameter :: tol = 1e-3
+    
+    assert_isclose = abs(x1-x2).le.tol
+end function assert_isclose
 
 end module lineclip

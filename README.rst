@@ -18,7 +18,7 @@ CVutils
 
 :Author: Michael Hirsch
 :License: MIT
-:Prereq: `OpenCV 2.4 or 3.0 <https://scivision.co/category/opencv/>`_
+:Prereq: `OpenCV 2 or OpenCV 3 <https://scivision.co/category/opencv/>`_
 
 .. contents::
 
@@ -26,13 +26,18 @@ Misc. algorithms useful for computer vision.
 
 Install
 =======
-
-`Requires OpenCV 2.4 or 3.0 <https://scivision.co/category/opencv/>`_
-
 ::
    
    python setup.py develop
 
+Fortran Build (optional)
+========================
+If you want to use the Fortran Cohen-Sutherland line clipping modules directly (optional)::
+
+    cd bin
+    cmake ..
+    make
+    
 
 Functions
 =========

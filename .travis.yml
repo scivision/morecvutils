@@ -38,6 +38,7 @@ install:
     - cd bin
     - FC=gfortran cmake ..
     - make
+    - cd ..
 
 script:
     - coverage run test/test.py

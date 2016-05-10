@@ -1,6 +1,10 @@
-from numpy.testing import assert_array_almost_equal
+from numpy.testing import assert_array_almost_equal,run_module_suite
+import subprocess
+from pathlib import Path
 #
 from cvutils.lineClipping import cohensutherland
+
+path=Path(__file__).parents[1]
 
 def test_lineclip():
     """
@@ -21,5 +25,9 @@ def test_lineclip():
                                   0,4,5,4)
     assert_array_almost_equal([x1,y1,x2,y2],[1, 4, 4, 4])
 
+def test_fortran_lineclip():
+    ret = subprocess.run([str(path / 'bin/run_lineclip')])
+    ret.check_returncode()
+
 if __name__ == '__main__':
-    test_lineclip()
+    run_module_suite()

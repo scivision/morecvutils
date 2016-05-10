@@ -3,15 +3,27 @@ language: python
 python:
     - 3.5
 
-sudo: false
+sudo: true
+dist: trusty
 
 notifications:
   email: false
 
 git:
   depth: 1
+  
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gfortran-5
+
 
 before_install:
+    - mkdir -p $HOME/.local/bin
+    - ln -fs /usr/bin/gfortran-5 "$HOME/.local/bin/gfortran"
+    - gfortran --version
     - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
     - chmod +x miniconda.sh
     - bash miniconda.sh -b -p $HOME/miniconda
@@ -23,6 +35,9 @@ install:
     - source activate test
     - pip -q install coveralls
     - python setup.py develop
+    - cd bin
+    - FC=gfortran cmake ..
+    - make
 
 script:
     - coverage run test/test.py

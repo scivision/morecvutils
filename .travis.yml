@@ -1,44 +1,47 @@
-language: python
-
-python:
-    - 3.5
-
-sudo: true
-dist: trusty
-
 notifications:
   email: false
 
 git:
-  depth: 1
+  depth: 3
   
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - gfortran-5
+env:
+  global:
+    - pyv=3.5
 
+matrix:
+  include:
+    - os: osx
+      env:
+        - osv=MacOSX
+      before_install:
+        - brew update && brew upgrade
+        - brew install gcc
 
-before_install:
-    - mkdir -p $HOME/.local/bin
-    - ln -fs /usr/bin/gfortran-5 "$HOME/.local/bin/gfortran"
-    - gfortran --version
-    - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
-    - chmod +x miniconda.sh
-    - bash miniconda.sh -b -p $HOME/miniconda
-    - export PATH=$HOME/miniconda/bin:$PATH
-
+    - os: linux
+      sudo: true
+      dist: trusty
+      env:
+        - osv=Linux
+      addons:
+          apt:
+            sources:
+            - ubuntu-toolchain-r-test
+            packages:
+            - gfortran-5
+      before_install:
+        - mkdir -p $HOME/.local/bin
+        - ln -fs /usr/bin/gfortran-5 "$HOME/.local/bin/gfortran"
+        - gfortran --version
 
 install:
-    - conda create --yes -n test python=$TRAVIS_PYTHON_VERSION
+    - wget http://repo.continuum.io/miniconda/Miniconda-latest-$osv-x86_64.sh -O miniconda.sh
+    - bash miniconda.sh -b -p $HOME/miniconda
+    - export PATH=$HOME/miniconda/bin:$PATH
+    - conda update --yes --quiet conda
+    - conda create --yes --quiet -n test python=$pyv
     - source activate test
     - pip -q install coveralls
     - python setup.py develop
-    - cd bin
-    - FC=gfortran cmake ..
-    - make
-    - cd ..
 
 script:
     - coverage run test/test.py

@@ -1,23 +1,27 @@
 #!/usr/bin/env python3
-
 from setuptools import setup
 import subprocess
+
+proc = subprocess.Popen(['cmake','..'], cwd='bin')
+#proc.communicate makes first Popen wait till done before proceeding
+proc.communicate()
+
+subprocess.Popen(['make'], cwd='bin')
+
 
 try:
     subprocess.run(['conda','install','--yes','--file','requirements.txt'])
 except Exception as e:
-    print('you will need to install packages in requirements.txt  {}'.format(e))
+    pass
 
 
 with open('README.rst','r') as f:
 	long_description = f.read()
 
 setup(name='cvutils',
-      version='0.1',
 	  description='OpenCV utilities for blob detection, optical flow plots, etc.',
 	  long_description=long_description,
 	  author='Michael Hirsch',
 	  url='https://github.com/scienceopen/cvutils',
-           packages=['cvutils'],
 	  )
 

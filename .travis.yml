@@ -14,7 +14,7 @@ matrix:
       env:
         - osv=MacOSX
       before_install:
-        - brew update && brew upgrade
+        - brew update
         - brew install gcc
 
     - os: linux

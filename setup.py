@@ -19,9 +19,10 @@ with open('README.rst','r') as f:
 	long_description = f.read()
 
 setup(name='cvutils',
-	  description='OpenCV utilities for blob detection, optical flow plots, etc.',
-	  long_description=long_description,
-	  author='Michael Hirsch',
-	  url='https://github.com/scienceopen/cvutils',
+      packages=['cvutils'],
+      description='OpenCV utilities for blob detection, optical flow plots, etc.',
+      long_description=long_description,
+      author='Michael Hirsch',
+      url='https://github.com/scienceopen/cvutils',
 	  )
 

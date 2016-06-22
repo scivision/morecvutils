@@ -3,7 +3,7 @@ from setuptools import setup
 import subprocess
 
 try:
-    prooc = subprocess.Popen(['cmake','..'], cwd='bin')
+    proc = subprocess.Popen(['cmake','..'], cwd='bin')
     #proc.communicate makes first Popen wait till done before proceeding
     proc.communicate()
 

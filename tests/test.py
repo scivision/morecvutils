@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from numpy.testing import assert_array_almost_equal,run_module_suite
 import subprocess
 from pathlib import Path

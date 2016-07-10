@@ -1,18 +1,16 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 from setuptools import setup
 import subprocess
 
 try:
-    proc = subprocess.Popen(['cmake','..'], cwd='bin')
-    #proc.communicate makes first Popen wait till done before proceeding
-    proc.communicate()
+    subprocess.call(['cmake','..'], cwd='bin')
 
-    subprocess.Popen(['make'], cwd='bin')
+    subprocess.call(['make'], cwd='bin')
 except OSError:
     print('skipped optional compile')
 
 try:
-    subprocess.run(['conda','install','--yes','--file','requirements.txt'])
+    subprocess.call(['conda','install','--yes','--file','requirements.txt'])
 except Exception as e:
     pass
 

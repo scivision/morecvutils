@@ -3,12 +3,11 @@
 Michael Hirsch
 Example calculations of optical flow, starting with Horn Schunk Optical Flow using OpenCV
 """
-from __future__ import division,absolute_import
 try:
     from cv2 import cv
 except Exception:
     pass
-from numpy import asarray,dstack,uint8
+from numpy import asarray,dstack
 
 def optflowHornSchunk(new,ref,uv,smoothing=0.01):
     """
@@ -41,15 +40,3 @@ def setupuv(rc):
 def calcofhs(new,ref,smoothing):
     uv = setupuv(new.shape)
     return optflowHornSchunk(new,ref,uv,smoothing)
-#%% demo
-if __name__ == '__main__':
-    from numpy.random import rand
-    rc = (512,512)
-    r,c=rc
-    uv = setupuv(rc)
-    old = (rand(r,c)*255).astype(uint8)
-
-    for i in range(100):
-        new = (rand(r,c)*255).astype(uint8)
-        flow = optflowHornSchunk(new,old,uv,smoothing=0.01)
-        old = new.copy()

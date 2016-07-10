@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 gets basic info about AVI file using OpenCV
 
 input: filename or cv2.Capture
 """
-from pathlib2 import Path
+from . import Path
 import cv2
 try:
     from cv2 import cv
@@ -14,18 +14,17 @@ from six import string_types,integer_types
 from struct import pack
 
 
-
 def getaviprop(f):
     if isinstance(f,(string_types,Path)): #assuming filename
         f = Path(f).expanduser()
         v = cv2.VideoCapture(str(f))
         if v is None:
-            raise TypeError('could not read {}'.format(f))
+            raise RuntimeError('could not read {}'.format(f))
     else: #assuming cv2.VideoCapture object
         v=f
 
     if not v.isOpened():
-        raise TypeError('cannot read {}  probable codec issue'.format(f))
+        raise RuntimeError('cannot read {}  probable codec issue'.format(f))
 
     try: #opencv 2.X
         vidparam = {'nframe': int(v.get(cv.CV_CAP_PROP_FRAME_COUNT)),

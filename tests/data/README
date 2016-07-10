@@ -1,0 +1,4 @@
+git clone https://github.com/scienceopen/cv-phantom-gen
+
+./AuroraPhantom.py -o png
+

@@ -26,6 +26,7 @@ def getaviprop(f):
     if not v.isOpened():
         raise RuntimeError('cannot read {}  probable codec issue'.format(f))
 
+#%% note the subtle different CV_ prefix to property name, thus this verbose technique
     try: #opencv 2.X
         vidparam = {'nframe': int(v.get(cv.CV_CAP_PROP_FRAME_COUNT)),
                     'xpix'  : int(v.get(cv.CV_CAP_PROP_FRAME_WIDTH)),

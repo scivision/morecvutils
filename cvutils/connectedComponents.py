@@ -1,4 +1,3 @@
-from __future__ import division,absolute_import
 import cv2
 try: #OpenCV 2.4
     from cv2 import SimpleBlobDetector as SimpleBlobDetector

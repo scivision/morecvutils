@@ -5,13 +5,13 @@ gets basic info about AVI file using OpenCV
 input: filename or cv2.Capture
 """
 from . import Path
+from six import string_types,integer_types
+from struct import pack
 import cv2
 try:
     from cv2 import cv
-except:
-    pass #OpenCV 3
-from six import string_types,integer_types
-from struct import pack
+except ImportError:
+    cv=None #OpenCV 3
 
 
 def getaviprop(f):
@@ -27,14 +27,14 @@ def getaviprop(f):
         raise RuntimeError('cannot read {}  probable codec issue'.format(f))
 
 #%% note the subtle different CV_ prefix to property name, thus this verbose technique
-    try: #opencv 2.X
+    if cv is not None: #opencv 2.X
         vidparam = {'nframe': int(v.get(cv.CV_CAP_PROP_FRAME_COUNT)),
                     'xpix'  : int(v.get(cv.CV_CAP_PROP_FRAME_WIDTH)),
                     'ypix'  : int(v.get(cv.CV_CAP_PROP_FRAME_HEIGHT)),
                     'fps'   : v.get(cv.CV_CAP_PROP_FPS),
                     'codec' : fourccint2ascii(int(v.get(cv.CV_CAP_PROP_FOURCC)))
                     }
-    except NameError: #opencv 3.0
+    else: #opencv 3.0
         vidparam = {'nframe': int(v.get(cv2.CAP_PROP_FRAME_COUNT)),
                     'xpix'  : int(v.get(cv2.CAP_PROP_FRAME_WIDTH)),
                     'ypix'  : int(v.get(cv2.CAP_PROP_FRAME_HEIGHT)),

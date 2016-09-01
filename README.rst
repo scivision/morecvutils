@@ -1,16 +1,9 @@
 .. image:: https://travis-ci.org/scienceopen/CVutils.svg?branch=master
     :target: https://travis-ci.org/scienceopen/CVutils
 
-.. image:: https://landscape.io/github/scienceopen/CVutils/master/landscape.svg?style=flat
-   :target: https://landscape.io/github/scienceopen/CVutils/master
-   :alt: Code Health
-
 .. image:: https://coveralls.io/repos/scienceopen/CVutils/badge.svg?branch=master&service=github 
   :target: https://coveralls.io/github/scienceopen/CVutils?branch=master 
 
-.. image:: https://codeclimate.com/github/scienceopen/CVutils/badges/gpa.svg
-  :target: https://codeclimate.com/github/scienceopen/CVutils
-  :alt: Code Climate
 
 ========
 CVutils

@@ -1,3 +1,6 @@
+.. image:: https://zenodo.org/badge/19711552.svg
+   :target: https://zenodo.org/badge/latestdoi/19711552
+
 .. image:: https://travis-ci.org/scienceopen/CVutils.svg?branch=master
     :target: https://travis-ci.org/scienceopen/CVutils
 

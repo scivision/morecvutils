@@ -20,6 +20,6 @@ setup(name='cvutils',
       description='OpenCV utilities for blob detection, optical flow plots, etc.',
       author='Michael Hirsch',
       url='https://github.com/scienceopen/cvutils',
-      install_requires=['pathlib2'],
+      install_requires=[],
 	  )
 

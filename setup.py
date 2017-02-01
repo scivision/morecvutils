@@ -6,20 +6,18 @@ try:
     subprocess.call(['cmake','..'], cwd='bin')
 
     subprocess.call(['make'], cwd='bin')
-except OSError:
+except OSError as e:
+    print(e)
     print('skipped optional compile')
 
 try:
-    subprocess.call(['conda','install','--file','requirements.txt'])
+    import conda.cli
+    conda.cli.main('install','--file','requirements.txt')
 except Exception as e:
-    pass
+    print(e)
 
 
 setup(name='cvutils',
       packages=['cvutils'],
-      description='OpenCV utilities for blob detection, optical flow plots, etc.',
-      author='Michael Hirsch',
-      url='https://github.com/scienceopen/cvutils',
-      install_requires=[],
 	  )
 

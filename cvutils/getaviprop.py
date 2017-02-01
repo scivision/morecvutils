@@ -4,8 +4,7 @@ gets basic info about AVI file using OpenCV
 
 input: filename or cv2.Capture
 """
-from . import Path
-from six import string_types,integer_types
+from pathlib import Path
 from struct import pack
 import cv2
 try:
@@ -15,7 +14,7 @@ except ImportError:
 
 
 def getaviprop(f):
-    if isinstance(f,(string_types,Path)): #assuming filename
+    if isinstance(f,(str,Path)): #assuming filename
         f = Path(f).expanduser()
         v = cv2.VideoCapture(str(f))
         if v is None:
@@ -50,7 +49,7 @@ def fourccint2ascii(fourcc_int):
     """
     useful for converting fourcc in integer form (32-bit int) to ASCII
     """
-    assert isinstance(fourcc_int,integer_types)
+    assert isinstance(fourcc_int,int)
     return pack('<I',fourcc_int)
 
 if __name__ == '__main__':

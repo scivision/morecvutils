@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from cvutils import Path
+from pathlib import Path
 from scipy.ndimage import imread
 from numpy import uint8,asfortranarray,hypot,empty,asarray,float32
 from matplotlib.pyplot import subplots,draw,pause

@@ -1,11 +1,11 @@
 .. image:: https://zenodo.org/badge/19711552.svg
    :target: https://zenodo.org/badge/latestdoi/19711552
 
-.. image:: https://travis-ci.org/scienceopen/CVutils.svg?branch=master
-    :target: https://travis-ci.org/scienceopen/CVutils
+.. image:: https://travis-ci.org/scienceopen/morecvutils.svg?branch=master
+    :target: https://travis-ci.org/scienceopen/morecvutils
 
-.. image:: https://coveralls.io/repos/scienceopen/CVutils/badge.svg?branch=master&service=github 
-  :target: https://coveralls.io/github/scienceopen/CVutils?branch=master 
+.. image:: https://coveralls.io/repos/scienceopen/morecvutils/badge.svg?branch=master&service=github 
+  :target: https://coveralls.io/github/scienceopen/morecvutils?branch=master 
 
 
 ========

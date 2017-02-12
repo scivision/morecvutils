@@ -4,7 +4,7 @@ from scipy.ndimage import imread
 from numpy import uint8,asfortranarray,hypot,empty,asarray,float32
 from matplotlib.pyplot import subplots,draw,pause
 #
-from cvutils.calcOptFlow import setupuv, optflowHornSchunk
+from morecvutils.calcOptFlow import setupuv, optflowHornSchunk
 
 def plotflow(mag,matmag):
     fg,ax = subplots(1,2,figsize=(12,5))

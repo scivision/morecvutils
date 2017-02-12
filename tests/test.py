@@ -3,7 +3,7 @@ from numpy.testing import assert_array_almost_equal,run_module_suite
 import subprocess
 from pathlib import Path
 #
-from cvutils.lineClipping import cohensutherland
+from morecvutils.lineClipping import cohensutherland
 
 path=Path(__file__).parents[1]
 

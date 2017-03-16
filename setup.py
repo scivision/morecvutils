@@ -8,7 +8,7 @@ setup(name='morecvutils',
       description='Computer Vision utilities, Cohen-Sutherland line clipping, OpenCV plot helpers for Optical Flow and Blob Analysis, AVI codec helpers',
       version='0.9',
       author='Michael Hirsch, Ph.D.',
-      url='https://github.com/scienceopen/morecvutils',
+      url='https://github.com/scivision/morecvutils',
       classifiers=[
       'Intended Audience :: Science/Research',
       'Development Status :: 4 - Beta',

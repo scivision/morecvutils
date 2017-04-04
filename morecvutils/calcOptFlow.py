@@ -9,7 +9,7 @@ except ImportError: # NOTE: openCV 3.0 has legacy code buried in opencv-extra
     cv = None
 from numpy import asarray,dstack
 #
-from pyOpticalFlow import HornSchunck
+from pyoptflow import HornSchunck
 
 def optflowHornSchunk(new,ref,uv,smoothing=0.01):
     if cv is not None:

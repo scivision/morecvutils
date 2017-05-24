@@ -1,7 +1,15 @@
 #!/usr/bin/env python
-from setuptools import setup
-
 req = ['nose','numpy']
+
+import pip
+try:
+    import conda.cli
+    conda.cli.main('install',*req)
+except Exception as e:
+    pip.main(['install'] + req)
+
+# %%
+from setuptools import setup
 
 setup(name='morecvutils',
       packages=['morecvutils'],
@@ -17,7 +25,6 @@ setup(name='morecvutils',
       'Programming Language :: Python :: 3.5',
       'Programming Language :: Python :: 3.6',
       ],
-      install_requires=req,
       extras_require={'cv2':['cv2']},
 	  )
 

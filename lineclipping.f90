@@ -47,33 +47,35 @@ k1 = getclip(x1,y1,xmin,xmax,ymin,ymax)
 k2 = getclip(x2,y2,xmin,xmax,ymin,ymax)
 
 
-do while (ior(k1,k2).ne.0)
+do while (ior(k1,k2) /= 0)
 
     !trivially outside window, Reject
-    if (iand(k1,k2).ne.0) then
+    if (iand(k1,k2) /= 0) then
         outside=.true.
         return
     endif
 
-    opt = merge(k1,k2,k1.gt.0)
-    if (iand(opt,UPPER).gt.0) then
+    opt = merge(k1,k2,k1 > 0)
+    if (iand(opt,UPPER) > 0) then
         x = x1 + (x2 - x1) * (ymax - y1) / (y2 - y1)
         y = ymax
-    else if (iand(opt,LOWER).gt.0) then
+    else if (iand(opt,LOWER) > 0) then
         x = x1 + (x2 - x1) * (ymin - y1) / (y2 - y1)
         y = ymin
-    else if (iand(opt,RIGHT).gt.0) then
+    else if (iand(opt,RIGHT) > 0) then
         y = y1 + (y2 - y1) * (xmax - x1) / (x2 - x1)
         x = xmax
-    else if (iand(opt,LEFT).gt.0) then
+    else if (iand(opt,LEFT) > 0) then
         y = y1 + (y2 - y1) * (xmin - x1) / (x2 - x1)
         x = xmin
+    else
+        error stop 'undefined clipping state' ! allowed Fortran 2015 standard
     endif
     
-    if (opt.eq.k1) then
+    if (opt == k1) then
         x1 = x; y1 = y
         k1 = getclip(x1,y1,xmin,xmax,ymin,ymax)
-    else if (opt.eq.k2) then
+    else if (opt == k2) then
         x2 = x; y2 = y
         k2 = getclip(x2,y2,xmin,xmax,ymin,ymax)
     endif
@@ -94,14 +96,14 @@ p = inside ! default
 !consider x
 if (xa.lt.xmin) then
     p = ior(p,left)
-elseif (xa.gt.xmax) then
+elseif (xa > xmax) then
     p = ior(p,right)
 endif
 
 !consider y
 if (ya.lt.ymin) then
     p = ior(p,lower)
-elseif (ya.gt.ymax) then
+elseif (ya > ymax) then
     p = ior(p,upper)
 endif
 
@@ -111,7 +113,7 @@ elemental logical function assert_isclose(x1,x2)
     real(sp),intent(in) :: x1,x2
     real(sp),parameter :: tol = 1e-3
     
-    assert_isclose = abs(x1-x2).le.tol
+    assert_isclose = abs(x1-x2) <= tol
 end function assert_isclose
 
 end module lineclip

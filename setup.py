@@ -1,19 +1,11 @@
 #!/usr/bin/env python
 req = ['nose','numpy']
-
-import pip
-try:
-    import conda.cli
-    conda.cli.main('install',*req)
-except Exception as e:
-    pip.main(['install'] + req)
-
 # %%
 import subprocess
-from setuptools import setup
+from setuptools import setup,find_packages
 
 setup(name='morecvutils',
-      packages=['morecvutils'],
+      packages=find_packages(),
       description='Computer Vision utilities, Cohen-Sutherland line clipping, OpenCV plot helpers for Optical Flow and Blob Analysis, AVI codec helpers',
       version='0.9.1',
       author='Michael Hirsch, Ph.D.',
@@ -25,7 +17,9 @@ setup(name='morecvutils',
       'Topic :: Scientific/Engineering :: Visualization',
       'Programming Language :: Python :: 3',
       ],
+      install_requires=req,
       extras_require={'cv2':['cv2']},
+      python_requires='>=3.5',
 	  )
 
 try:

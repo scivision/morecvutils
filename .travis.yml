@@ -1,10 +1,13 @@
-language: generic
+language: python
 fast_finish: true
+
+python: 
+  - 3.6
 
 os:
   - linux
-  - osx
 
+sudo: required
 dist: trusty
 group: edge
   
@@ -26,24 +29,8 @@ addons:
       - gfortran-6
 
 before_install:
-    - if [[ $TRAVIS_OS_NAME == osx ]]; then
-        wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh;
-        brew update;
-        brew install gcc;
-        export FC=gfortran;
-      else
-        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-      fi
-
-    - bash miniconda.sh -b -p $HOME/miniconda
-    - export PATH=$HOME/miniconda/bin:$PATH
-    - hash -r
-
-    - conda config --set always_yes yes --set changeps1 no
-    - conda update -q conda
-#    - conda create -n test python=$TRAVIS_PYTHON_VERSION
-#    - source activate test
-    - pip -q install coveralls
+  - sudo update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-6 40
+  - pip -q install coveralls
 
 install:
     - cd bin
@@ -51,7 +38,7 @@ install:
     - make
     - cd ..
     
-    - python setup.py develop
+    - pip install -e .
 
 script: coverage run tests/test.py -v
 

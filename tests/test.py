@@ -29,5 +29,6 @@ def test_lineclip():
 def test_fortran_lineclip():
     ret = subprocess.check_call([str(path / 'bin/run_lineclip')])
 
+
 if __name__ == '__main__':
     run_module_suite()

@@ -41,6 +41,9 @@ Functions
 ================================= ======================
 function                          description
 ================================= ======================
+lineClipping.py                     Cohen-Sutherland line clipping algorithm for Julia. Input scalars, output intersection length, or ``None`` if no intersection.
+
+
 lineClipping.py                     Cohen-Sutherland line clipping algorithm for Python. Input scalars, output intersection length, or ``None`` if no intersection.
 
 draw_flow()                         given a 2-D complex Numpy array of optical flow ``flow``, draw flow vectors with arrows

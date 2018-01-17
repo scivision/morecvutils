@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-req = ['nose','numpy']
+install_requires = ['numpy']
+tests_require=['nose','coveralls']
 # %%
 import subprocess
 from setuptools import setup,find_packages
@@ -17,8 +18,10 @@ setup(name='morecvutils',
       'Topic :: Scientific/Engineering :: Visualization',
       'Programming Language :: Python :: 3',
       ],
-      install_requires=req,
-      extras_require={'cv2':['cv2']},
+      install_requires=install_requires,
+      tests_require=tests_require,
+      extras_require={'cv2':['cv2'],
+                      'tests':tests_require},
       python_requires='>=3.5',
 	  )
 

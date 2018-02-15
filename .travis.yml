@@ -7,38 +7,18 @@ python:
 os:
   - linux
 
-sudo: required
-dist: trusty
-group: edge
+group: travis_latest
   
-env: 
-  - FC=gfortran-6
-
-
-notifications:
-  email: false
-
 git:
   depth: 3
 
 addons:
   apt:
-    sources:
-    - ubuntu-toolchain-r-test
     packages:
-      - gfortran-6
-
-before_install:
-  - sudo update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-6 40
-  - pip -q install coveralls
+      - gfortran
 
 install:
-    - cd bin
-    - cmake ..
-    - make
-    - cd ..
-    
-    - pip install -e .
+    - pip install -e .[tests]
 
 script: coverage run tests/test.py -v
 

@@ -48,7 +48,7 @@ Python
     
     x3,y3,x4,y4 = lc.cohensutherland((xmin, ymax, xmax, ymin, x1, y1, x2, y2)
     
-If no intersection, `(None, None, None, None)` is returned.
+If no intersection, ``(None, None, None, None)`` is returned.
 
 Fortran
 -------
@@ -79,7 +79,7 @@ The arguments are::
 
 Julia
 -----
-Simliar to Python, except `nothing` is returned if no intersection found.
+Simliar to Python, except ``nothing`` is returned if no intersection found.
 
 .. code:: julia
 

@@ -31,6 +31,14 @@ subroutine test_array_lineclip()
     length = hypot((x2-x1), (y2-y1))
     call assert_isclose(length, truelength)
     
+!-----------
+
+    call cohensutherland(xmins,ymaxs,xmaxs,ymins,x1,y1,x2,y2)
+    
+    length = hypot((x2-x1), (y2-y1))
+    call assert_isclose(length, truelength)
+
+    
     print *, 'OK array_lineclip'
     
 

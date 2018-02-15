@@ -42,7 +42,7 @@ The main difference with textbook implementations is that I return a sentinel va
 Python
 ------
 
-.. code::python
+.. code:: python
 
     import morecvutils.lineclipping as lc
     
@@ -64,7 +64,7 @@ Fortran programs will simply use
     call cohensutherland(xmin,ymax,xmax,ymin,x1,y1,x2,y2)
 
 
-The arguments are:
+The arguments are::
 
     INPUTS
     ------

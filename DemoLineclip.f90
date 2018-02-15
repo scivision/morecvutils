@@ -1,18 +1,18 @@
 program test
 
     use, intrinsic:: ieee_arithmetic
-    use lineclip,only:wp, Ccohensutherland, cohensutherland
+    use lineclip,only: Ccohensutherland, cohensutherland
     use assert
 
     implicit none
 
     call test_lineclip()
 
-    call test_loop()
+    call test_array_lineclip()
 
 contains
   
-subroutine test_loop()
+subroutine test_array_lineclip()
 
     integer, parameter :: Np=2
     real(wp), dimension(Np) :: length, x1,x2,y1,y2
@@ -31,10 +31,10 @@ subroutine test_loop()
     length = hypot((x2-x1), (y2-y1))
     call assert_isclose(length, truelength)
     
-    print *, 'OK loop_lineclip'
+    print *, 'OK array_lineclip'
     
 
-end subroutine test_loop
+end subroutine test_array_lineclip
 
 !--------------------
 

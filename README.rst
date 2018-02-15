@@ -41,8 +41,9 @@ Functions
 ================================= ======================
 function                          description
 ================================= ======================
-lineClipping.py                     Cohen-Sutherland line clipping algorithm for Julia. Input scalars, output intersection length, or ``None`` if no intersection.
+lineClipping.jl                    Cohen-Sutherland line clipping algorithm for Julia. Input scalars, output intersection length, or ``None`` if no intersection.
 
+lineclipping.f90                   Cohen-Sutherland line clipping algorithm for Fortran. Input scalars or arrays, output intersections.
 
 lineClipping.py                     Cohen-Sutherland line clipping algorithm for Python. Input scalars, output intersection length, or ``None`` if no intersection.
 

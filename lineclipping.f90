@@ -1,8 +1,8 @@
 module lineclip
 
-use, intrinsic :: iso_c_binding, only: sp=>C_FLOAT, dp=>C_DOUBLE, i64=>C_LONG_LONG, sizeof=>c_sizeof, c_int
-use, intrinsic :: iso_fortran_env, only : stderr=>error_unit
-use, intrinsic :: ieee_arithmetic, only: ieee_value, ieee_quiet_nan, ieee_is_nan
+use, intrinsic:: iso_c_binding, only: sp=>C_FLOAT, dp=>C_DOUBLE, c_int
+use, intrinsic:: iso_fortran_env, only : stderr=>error_unit
+use, intrinsic:: ieee_arithmetic, only: ieee_value, ieee_quiet_nan, ieee_is_nan
 
 implicit none
 
@@ -13,7 +13,7 @@ implicit none
 
 contains
 
-subroutine Ccohensutherland(xmin,ymax,xmax,ymin,Np,x1,y1,x2,y2)
+subroutine Ccohensutherland(xmin,ymax,xmax,ymin,Np,x1,y1,x2,y2) bind(c)
 ! for C/C++/f2py that need constant length arrays
     
     integer(c_int), intent(in) :: Np
@@ -93,16 +93,16 @@ p = inside ! default
 
 !consider x
 if (xa < xmin) then
-    p = ior(p,left)
+  p = ior(p,left)
 elseif (xa > xmax) then
-    p = ior(p,right)
+  p = ior(p,right)
 endif
 
 !consider y
 if (ya < ymin) then
-    p = ior(p,lower)
+  p = ior(p,lower)
 elseif (ya > ymax) then
-    p = ior(p,upper)
+  p = ior(p,upper)
 endif
 
 end function getclip

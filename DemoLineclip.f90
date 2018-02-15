@@ -1,55 +1,43 @@
 program test
 
-    implicit none
-     
-    logical test_lineclip, test_loop
+    use lineclip,only:wp, loop_cohensutherland, cohensutherland
+    use assert
 
-    if(test_lineclip())   print *, 'OK lineclip'
-
-    if(test_loop())  print *, 'OK loop_lineclip'
-
-end program
-
-!------------------------
-
-logical function test_loop()
-
-    use lineclip,only : sp,loop_cohensutherland,assert_isclose
     implicit none
 
+    call test_lineclip()
+
+    call test_loop()
+
+contains
+  
+subroutine test_loop()
 
     integer, parameter :: Np=2
-    integer i
-    real(sp) :: length(Np)
-    real(sp),parameter :: xmins(Np)=[1.,2.],ymaxs(Np)=[5.,6.],&
+    real(wp) :: length(Np)
+    real(wp),parameter :: xmins(Np)=[1.,2.],ymaxs(Np)=[5.,6.],&
                           xmaxs(Np)=[4.,5.],ymins(Np)=[3.,4.]
-    real(sp),parameter :: truelength(Np) =[2.40370083,1.20185041]
+    real(wp),parameter :: truelength(Np) =[2.40370083,1.20185041]
 
-    real(sp) :: x1,x2,y1,y2
+    real(wp) :: x1,x2,y1,y2
     x1=0.; y1=0.; x2=4.; y2=6. !not a parameter
 
     
     call loop_cohensutherland(xmins,ymaxs,xmaxs,ymins,Np,x1,y1,x2,y2,length)
     
     
-    do concurrent (i=1:Np)
-        if (.not.assert_isclose(length(i),truelength(i)))  error stop
-    enddo
+    call assert_isclose(length, truelength)
     
-    test_loop=.true.
+    print *, 'OK loop_lineclip'
+    
 
-
-end function test_loop
+end subroutine test_loop
 
 !--------------------
 
-logical function test_lineclip()
+subroutine test_lineclip()
 
-    use lineclip, only : sp,cohensutherland,assert_isclose
-    implicit none
-
-    real(sp) :: x1, y1, x2, y2  !not a parameter
-    logical outside
+    real(wp) :: x1, y1, x2, y2  !not a parameter
 
 !    make box with corners LL/UR (1,3) (4,5)
 !    and line segment with ends (0,0) (4,6)
@@ -57,13 +45,15 @@ logical function test_lineclip()
 ! LOWER to UPPER test   
     x1=0.; y1=0.; x2=4.; y2=6.
 
-    call cohensutherland(1., 5., 4., 3.,x1,y1,x2,y2,outside)
+    call cohensutherland(1._wp, 5._wp, 4._wp, 3._wp,x1,y1,x2,y2)
     
-    if (.not.assert_isclose(x1,2.)) error stop 'tolerance fail x1'
-    if (.not.assert_isclose(y1,3.)) error stop 'tolerance fail y1'
-    if (.not.assert_isclose(x2,3.3333333)) error stop 'tolerance fail x2'
-    if (.not.assert_isclose(y2,5.)) error stop 'tolerance fail y2'
+    call assert_isclose(x1, 2._wp)
+    call assert_isclose(y1, 3._wp)
+    call assert_isclose(x2, 3.3333333_wp)
+    call assert_isclose(y2, 5._wp)
+    
+    print *, 'OK lineclip'
+    
+end subroutine test_lineclip
 
-    test_lineclip=.true.
-
-end function test_lineclip
+end program

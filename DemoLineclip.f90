@@ -1,6 +1,6 @@
 program test
 
-    use lineclip,only:wp, loop_cohensutherland, cohensutherland
+    use lineclip,only:wp, Ccohensutherland, cohensutherland
     use assert
 
     implicit none
@@ -14,18 +14,20 @@ contains
 subroutine test_loop()
 
     integer, parameter :: Np=2
-    real(wp) :: length(Np)
+    real(wp), dimension(Np) :: length, x1,x2,y1,y2
     real(wp),parameter :: xmins(Np)=[1.,2.],ymaxs(Np)=[5.,6.],&
                           xmaxs(Np)=[4.,5.],ymins(Np)=[3.,4.]
-    real(wp),parameter :: truelength(Np) =[2.40370083,1.20185041]
+    real(wp),parameter :: truelength(Np) =[2.40370083, 3.]
 
-    real(wp) :: x1,x2,y1,y2
-    x1=0.; y1=0.; x2=4.; y2=6. !not a parameter
+    x1=[0.,0.]
+    y1=[0.,4.]
+    x2=[4.,5.]
+    y2=[6.,4.]
 
     
-    call loop_cohensutherland(xmins,ymaxs,xmaxs,ymins,Np,x1,y1,x2,y2,length)
+    call Ccohensutherland(xmins,ymaxs,xmaxs,ymins,Np,x1,y1,x2,y2)
     
-    
+    length = hypot((x2-x1), (y2-y1))
     call assert_isclose(length, truelength)
     
     print *, 'OK loop_lineclip'

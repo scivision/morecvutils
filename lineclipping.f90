@@ -9,32 +9,23 @@ implicit none
     integer, parameter :: wp=dp
     integer,parameter :: inside=0,left=1,right=2,lower=4,upper=8
     private
-    public:: wp,cohensutherland,loop_cohensutherland
+    public:: wp,cohensutherland,Ccohensutherland
 
 contains
 
-subroutine loop_cohensutherland(xmins,ymaxs,xmaxs,ymins,Np,x1,y1,x2,y2,length)
-! for a single quad of points, loops over the boxes.
+subroutine Ccohensutherland(xmin,ymax,xmax,ymin,Np,x1,y1,x2,y2)
+! for C/C++/f2py that need constant length arrays
     
     integer(c_int), intent(in) :: Np
-    real(wp),intent(in) :: xmins(Np),ymaxs(Np),xmaxs(Np),ymins(Np)
-    
-    real(wp),intent(inout):: x1,y1,x2,y2
-    real(wp),intent(out) :: length(Np) !length of each intersection line segment
-    
-    integer i
+    real(wp),intent(in), dimension(Np) :: xmin,ymax,xmax,ymin
+    real(wp),intent(inout), dimension(Np):: x1,y1,x2,y2
+  
+    call cohensutherland(xmin, ymax, xmax,ymin,x1,y1,x2,y2)
 
-    length = -1. !init
-
-    do concurrent (i=1:Np)
-        call cohensutherland(xmins(i), ymaxs(i),xmaxs(i),ymins(i),x1,y1,x2,y2)
-        if (.not.ieee_is_nan(x1)) length(i) = hypot((x2-x1),(y2-y1))
-    end do
+end subroutine Ccohensutherland
 
 
-end subroutine loop_cohensutherland
-
-pure subroutine cohensutherland(xmin,ymax,xmax,ymin, &
+elemental subroutine cohensutherland(xmin,ymax,xmax,ymin, &
                                 x1, y1, x2, y2)
     
 real(wp), intent(in) :: xmin,ymax,xmax,ymin

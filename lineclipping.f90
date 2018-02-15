@@ -15,6 +15,17 @@ contains
 
 subroutine Ccohensutherland(xmin,ymax,xmax,ymin,Np,x1,y1,x2,y2) bind(c)
 ! for C/C++/f2py that need constant length arrays
+!
+! INPUTS
+! ------
+! xmin,ymax,xmax,ymin:  upper left and lower right corners of box (pixel coordinates)
+! Np: number of points in vectors (number of elementts)
+! 
+! INOUT
+! -----
+! x1,y1,x2,y2: 
+! in - endpoints of line
+! out - intersection points with box. If no intersection, all NaN
     
     integer(c_int), intent(in) :: Np
     real(wp),intent(in), dimension(Np) :: xmin,ymax,xmax,ymin
@@ -27,6 +38,15 @@ end subroutine Ccohensutherland
 
 elemental subroutine cohensutherland(xmin,ymax,xmax,ymin, &
                                 x1, y1, x2, y2)
+! INPUTS
+! ------
+! xmin,ymax,xmax,ymin:  upper left and lower right corners of box (pixel coordinates)
+! 
+! INOUT
+! -----
+! x1,y1,x2,y2: 
+! in - endpoints of line
+! out - intersection points with box. If no intersection, all NaN
     
 real(wp), intent(in) :: xmin,ymax,xmax,ymin
 real(wp), intent(out):: x1,y1,x2,y2

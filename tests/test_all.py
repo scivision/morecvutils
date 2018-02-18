@@ -27,7 +27,7 @@ def test_lineclip():
     assert_array_almost_equal([x1,y1,x2,y2],[1, 4, 4, 4])
 
 def test_fortran_lineclip():
-    ret = subprocess.check_call([str(path / 'bin/run_lineclip')])
+    ret = subprocess.check_call([str(path / 'bin/RunLineclip')])
 
 
 if __name__ == '__main__':

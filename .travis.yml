@@ -20,7 +20,7 @@ addons:
 install:
     - pip install -e .[tests]
 
-script: coverage run tests/test.py -v
+script: coverage run tests/test_all.py -v
 
 after_success: coveralls
 

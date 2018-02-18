@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-install_requires = ['numpy']
+install_requires = ['numpy','imageio']
 tests_require=['nose','coveralls']
 # %%
 import subprocess
@@ -8,7 +8,8 @@ from setuptools import setup,find_packages
 setup(name='morecvutils',
       packages=find_packages(),
       description='Computer Vision utilities, Cohen-Sutherland line clipping, OpenCV plot helpers for Optical Flow and Blob Analysis, AVI codec helpers',
-      version='0.9.1',
+      long_description=open('README.rst').read(),
+      version='0.9.2',
       author='Michael Hirsch, Ph.D.',
       url='https://github.com/scivision/morecvutils',
       classifiers=[

@@ -10,7 +10,9 @@ from __future__ import division
  * The best way to Numba JIT this would probably be in the function calling this, to include the loop itself
    inside the jit decoration.
 '''
-#@jit
+# @jit
+
+
 def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2):
     """Clips a line to a rectangular area.
 
@@ -23,11 +25,11 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2):
     four None values will be returned as tuple. Otherwise a tuple of the
     clipped line points will be returned in the form (cx1, cy1, cx2, cy2).
     """
-    INSIDE,LEFT, RIGHT, LOWER, UPPER = 0,1, 2, 4, 8
+    INSIDE, LEFT, RIGHT, LOWER, UPPER = 0, 1, 2, 4, 8
 
     def _getclip(xa, ya):
         #if dbglvl>1: print('point: '),; print(xa,ya)
-        p = INSIDE  #default is inside
+        p = INSIDE  # default is inside
 
         # consider x
         if xa < xmin:
@@ -37,29 +39,29 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2):
 
         # consider y
         if ya < ymin:
-            p |= LOWER # bitwise OR
+            p |= LOWER  # bitwise OR
         elif ya > ymax:
-            p |= UPPER #bitwise OR
+            p |= UPPER  # bitwise OR
         return p
 
 # check for trivially outside lines
     k1 = _getclip(x1, y1)
     k2 = _getclip(x2, y2)
 
-#%% examine non-trivially outside points
-    #bitwise OR |
-    while (k1 | k2) != 0: # if both points are inside box (0000) , ACCEPT trivial whole line in box
+# %% examine non-trivially outside points
+    # bitwise OR |
+    while (k1 | k2) != 0:  # if both points are inside box (0000) , ACCEPT trivial whole line in box
 
         # if line trivially outside window, REJECT
-        if (k1 & k2) != 0: #bitwise AND &
+        if (k1 & k2) != 0:  # bitwise AND &
             #if dbglvl>1: print('  REJECT trivially outside box')
-            #return nan, nan, nan, nan
+            # return nan, nan, nan, nan
             return None, None, None, None
 
-        #non-trivial case, at least one point outside window
+        # non-trivial case, at least one point outside window
         # this is not a bitwise or, it's the word "or"
-        opt = k1 or k2 # take first non-zero point, short circuit logic
-        if opt & UPPER: #these are bitwise ANDS
+        opt = k1 or k2  # take first non-zero point, short circuit logic
+        if opt & UPPER:  # these are bitwise ANDS
             x = x1 + (x2 - x1) * (ymax - y1) / (y2 - y1)
             y = ymax
         elif opt & LOWER:
@@ -83,4 +85,3 @@ def cohensutherland(xmin, ymax, xmax, ymin, x1, y1, x2, y2):
             x2, y2 = x, y
             k2 = _getclip(x2, y2)
     return x1, y1, x2, y2
-

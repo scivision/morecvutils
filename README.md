@@ -1,6 +1,6 @@
 [![image](https://zenodo.org/badge/19711552.svg)](https://zenodo.org/badge/latestdoi/19711552)
 
-[![Build Status](https://travis-ci.com/scivision/morecvutils.svg?branch=master)](https://travis-ci.com/scivision/morecvutils)
+[![Build Status](https://travis-ci.org/scivision/morecvutils.svg?branch=master)](https://travis-ci.org/scivision/morecvutils)
 [![Python versions (PyPI)](https://img.shields.io/pypi/pyversions/morecvutils.svg)](https://pypi.python.org/pypi/morecvutils)
 [![Downloads](https://pepy.tech/badge/morecvutils)](https://pepy.tech/project/morecvutils)
 

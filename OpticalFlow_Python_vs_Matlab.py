@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 from pathlib import Path
 import imageio
-from numpy import uint8, hypot, empty, asarray
+from typing import Sequence
+import numpy as np
 from matplotlib.pyplot import figure, draw, pause, show
 #
 from morecvutils.calcOptFlow import setupuv, optflowHornSchunk
@@ -39,7 +40,7 @@ def matlab_flow(I):
     eng = matlab.engine.start_matlab("-nojvm")
 
     matmag = eng.test_optflow(matlab.uint8(I.tolist()))
-    matmag = asarray(matmag)
+    matmag = np.asarray(matmag)
 
     eng.quit()
 
@@ -49,42 +50,39 @@ def matlab_flow(I):
 def py_flow(I, N, r, c):
     uv = setupuv((r, c))
 
-    mag = empty((N, r, c))  # priming read
+    mag = np.empty((N, r, c))  # priming read
 
     for i in range(N):
         flow = optflowHornSchunk(I[i+1, ...], I[i, ...], uv, smoothing=0.001)
-        mag[i, ...] = hypot(flow[..., 0], flow[..., 1])
+        mag[i, ...] = np.hypot(flow[..., 0], flow[..., 1])
 
     return mag
 
 
-def setup(flist):
+def setup(flist: Sequence[Path]):
     N = len(flist)-1
     r, c = imageio.imread(str(flist[0])).shape
-    I = empty((N+1, r, c), dtype=uint8)
+    im = np.empty((N+1, r, c), dtype=np.uint8)
 
     for i, f in enumerate(flist):
-        I[i, ...] = imageio.imread(str(f))
+        im[i, ...] = imageio.imread(str(f))
 
-    return I, N, r, c
+    return im, N, r, c
 
 
 if __name__ == '__main__':
 
-    try:
-        plotflow(mag, matmag)
-    except NameError:
-        flist = sorted(Path('tests/data').glob('*.png'))
+    flist = sorted(Path('tests/data').glob('*.png'))
 
-        I, N, r, c = setup(flist)
-        # %% python
-        mag = py_flow(I, N, r, c)
-        # %% Matlab
-        try:
-            matmag = matlab_flow(I)
-        except ImportError:
-            matmag = None
-        # %%
-        plotflow(mag, matmag)
+    I, N, r, c = setup(flist)
+    # %% python
+    mag = py_flow(I, N, r, c)
+    # %% Matlab
+    try:
+        matmag = matlab_flow(I)
+    except ImportError:
+        matmag = None
+    # %%
+    plotflow(mag, matmag)
 
     show()

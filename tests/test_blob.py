@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 import pytest
 import numpy as np
+from pytest import approx
+from pathlib import Path
 
 import morecvutils.connectedComponents as mb
+
+R = Path(__file__).parent
 
 
 def test_blob():
@@ -23,6 +27,18 @@ def test_blob():
     labeled_img, label_sizes = mb.doblob(im_bad, blob)
 
     assert len(label_sizes) == 0
+
+
+def test_avi():
+    pytest.importorskip('cv2')
+    from morecvutils.getaviprop import getaviprop
+
+    finf = getaviprop(R / 'data/bunny.avi')
+
+    assert finf['fps'] == approx(24.0)
+    assert finf['xy_pixel'] == (426, 240)
+    assert finf['nframe'] == 168
+    assert finf['codec'] == 'H264'
 
 
 if __name__ == '__main__':

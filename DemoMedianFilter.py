@@ -6,7 +6,9 @@ from matplotlib.pyplot import figure, show
 from typing import Tuple
 
 
-def gen_patterns(x: int, y: int, dtype=np.uint8, noise: float = 0.0) -> Tuple[np.ndarray, np.ndarray]:
+def gen_patterns(
+    x: int, y: int, dtype=np.uint8, noise: float = 0.0
+) -> Tuple[np.ndarray, np.ndarray]:
 
     if dtype == np.uint8:
         V = 255
@@ -32,7 +34,7 @@ def gen_patterns(x: int, y: int, dtype=np.uint8, noise: float = 0.0) -> Tuple[np
     im[21:24:2, 21:24:2] = V
 
     if noise > 0:
-        im = random_noise(im, 's&p', amount=noise).astype('uint8')*V
+        im = random_noise(im, 's&p', amount=noise).astype('uint8') * V
 
     im2 = np.zeros((y, x), dtype='uint8')
     im2[4:7, 4:7] = V
@@ -60,14 +62,16 @@ def plot_panel(fg, im: np.ndarray):
     ax.set_title('erosion')
 
     ax = fg.add_subplot(1, 4, 4)
-    ax.imshow(cv2.erode(imfilt, kern), cmap='gray_r', interpolation='none', origin='bottom')
+    ax.imshow(
+        cv2.erode(imfilt, kern), cmap='gray_r', interpolation='none', origin='bottom'
+    )
     ax.set_title('erosion median filtered')
 
     # for a in ax:
     #   a.set_xlim((0, im.shape[1]))
 
 
-im1, im2 = gen_patterns(32, 32, np.uint8, 0.)
+im1, im2 = gen_patterns(32, 32, np.uint8, 0.0)
 
 plot_panel(figure(), im1)
 plot_panel(figure(), im2)

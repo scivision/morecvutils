@@ -6,9 +6,7 @@ from skimage.util import random_noise
 from morecvutils.connectedComponents import setupblob, doblob
 
 
-def gen_patterns(x: int, y: int,
-                 dtype=np.uint8,
-                 add_noise: float = 0.0) -> np.ndarray:
+def gen_patterns(x: int, y: int, dtype=np.uint8, add_noise: float = 0.0) -> np.ndarray:
 
     if dtype == np.uint8:
         V = 255
@@ -36,7 +34,7 @@ def gen_patterns(x: int, y: int,
     im[190:220:1, 120:200:1] = V
 
     if add_noise > 0:
-        im = random_noise(im, 's&p', amount=add_noise).astype('uint8')*V
+        im = random_noise(im, 's&p', amount=add_noise).astype('uint8') * V
 
     return im
 
@@ -46,7 +44,7 @@ def main():
     # image dimension (arbitrary)
     x = y = 256
 
-    img_area = x*y
+    img_area = x * y
     print(f'area of the {x} x {y} image is {img_area} pixels')
 
     # set some arbitrary parameters
@@ -55,7 +53,7 @@ def main():
 
     print(f'Minimum and maximum blob areas: {min_blob}, {max_blob}')
 
-    im1 = gen_patterns(x, y, np.uint8, 0.)
+    im1 = gen_patterns(x, y, np.uint8, 0.0)
 
     blob = setupblob(min_blob, max_blob, 4)
 

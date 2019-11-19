@@ -4,6 +4,7 @@ import imageio
 from typing import Sequence
 import numpy as np
 from matplotlib.pyplot import figure, draw, pause, show
+
 #
 from morecvutils.calcOptFlow import setupuv, optflowHornSchunk
 
@@ -12,7 +13,7 @@ def plotflow(mag, matmag):
     fg = figure(figsize=(12, 5))
     ax = fg.subplots(1, 2)
 
-    for i in range(I.shape[0]-1):
+    for i in range(I.shape[0] - 1):
         if i == 0:
             hi = ax[0].imshow(mag[0, ...])
             ax[0].set_title('Python optical flow mag')
@@ -37,6 +38,7 @@ def plotflow(mag, matmag):
 
 def matlab_flow(I):
     import matlab.engine
+
     eng = matlab.engine.start_matlab("-nojvm")
 
     matmag = eng.test_optflow(matlab.uint8(I.tolist()))
@@ -53,16 +55,16 @@ def py_flow(I, N, r, c):
     mag = np.empty((N, r, c))  # priming read
 
     for i in range(N):
-        flow = optflowHornSchunk(I[i+1, ...], I[i, ...], uv, smoothing=0.001)
+        flow = optflowHornSchunk(I[i + 1, ...], I[i, ...], uv, smoothing=0.001)
         mag[i, ...] = np.hypot(flow[..., 0], flow[..., 1])
 
     return mag
 
 
 def setup(flist: Sequence[Path]):
-    N = len(flist)-1
+    N = len(flist) - 1
     r, c = imageio.imread(str(flist[0])).shape
-    im = np.empty((N+1, r, c), dtype=np.uint8)
+    im = np.empty((N + 1, r, c), dtype=np.uint8)
 
     for i, f in enumerate(flist):
         im[i, ...] = imageio.imread(str(f))

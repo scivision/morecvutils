@@ -1,0 +1,7 @@
+include LICENSE.txt
+include Demo*.py
+include Demo*.m
+include OpticalFlow_Python_vs_Matlab.py
+include mypy.ini
+
+graft tests

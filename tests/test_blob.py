@@ -4,13 +4,11 @@ import numpy as np
 from pytest import approx
 from pathlib import Path
 
-import morecvutils.connectedComponents as mb
-
 R = Path(__file__).parent
 
 
 def test_blob():
-
+    mb = pytest.importorskip('morecvutils.connectedComponents')
     im_good = np.zeros((32, 32), dtype=np.uint8)
     im_good[10:20, 10:20] = 255
 
@@ -30,10 +28,9 @@ def test_blob():
 
 
 def test_avi():
-    pytest.importorskip('cv2')
-    from morecvutils.getaviprop import getaviprop
+    getaviprop = pytest.importorskip('morecvutils.getaviprop')
 
-    finf = getaviprop(R / 'data/bunny.avi')
+    finf = getaviprop.getaviprop(R / 'data/bunny.avi')
 
     assert finf['fps'] == approx(24.0)
     assert finf['xy_pixel'] == (426, 240)

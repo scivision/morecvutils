@@ -1,2 +1,2 @@
 include LICENSE.txt
-graft tests
+recursive-include tests *.py *.png

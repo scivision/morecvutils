@@ -1,2 +1,5 @@
 include LICENSE.txt
-recursive-include tests *.py *.png
+
+include mypy.ini
+include pytest.ini
+graft tests

@@ -1,2 +1,33 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "morecvutils"
+version = "1.0.2"
+description = "Computer Vision utilities, OpenCV plot helpers for Optical Flow and Blob Analysis, AVI codec helpers"
+requires-python = ">=3.10"
+keywords = ["computer vision", "opencv"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Visualization"
+]
+dependencies = [
+    "numpy",
+    "imageio"
+]
+
+[project.optional-dependencies]
+tests = ["pytest"]
+lint = ["flake8", "mypy"]
+plot = ["matplotlib", "seaborn"]
+opencv = ["opencv-python"]
+
+[tool.mypy]
+ignore_missing_imports = true
+strict_optional = false
+allow_redefinition = true

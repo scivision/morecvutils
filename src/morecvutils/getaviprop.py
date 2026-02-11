@@ -6,11 +6,11 @@ input: filename or cv2.Capture
 """
 from pathlib import Path
 from struct import pack
-from typing import Dict, Any
+from typing import Any
 import cv2
 
 
-def getaviprop(fn: Path) -> Dict[str, Any]:
+def getaviprop(fn: Path) -> dict[str, Any]:
     if isinstance(fn, (str, Path)):  # assuming filename
         fn = Path(fn).expanduser()
         if not fn.is_file():

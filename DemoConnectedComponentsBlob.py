@@ -6,7 +6,7 @@ from skimage.util import random_noise
 from morecvutils.connectedComponents import setupblob, doblob
 
 
-def gen_patterns(x: int, y: int, dtype=np.uint8, add_noise: float = 0.0) -> np.ndarray:
+def gen_patterns(x: int, y: int, dtype=np.uint8, add_noise: float = 0.0):
 
     if dtype == np.uint8:
         V = 255

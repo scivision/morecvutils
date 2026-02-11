@@ -3,7 +3,6 @@
 Michael Hirsch
 Example calculations of optical flow, starting with Horn Schunk Optical Flow using OpenCV
 """
-import numpy as np
 
 try:
     import cv2
@@ -16,8 +15,8 @@ from pyoptflow import HornSchunck
 
 
 def optflowHornSchunk(
-    new: np.ndarray, ref: np.ndarray, uv, smoothing=0.01
-) -> np.ndarray:
+    new, ref, uv, smoothing=0.01
+):
     if cv2 is not None:
         """
         http://docs.opencv.org/modules/legacy/doc/motion_analysis.html

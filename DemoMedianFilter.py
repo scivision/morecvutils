@@ -3,12 +3,11 @@ import cv2
 import numpy as np
 from skimage.util import random_noise
 from matplotlib.pyplot import figure, show
-from typing import Tuple
 
 
 def gen_patterns(
     x: int, y: int, dtype=np.uint8, noise: float = 0.0
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> tuple:
 
     if dtype == np.uint8:
         V = 255
@@ -43,7 +42,7 @@ def gen_patterns(
     return im, im2
 
 
-def plot_panel(fg, im: np.ndarray):
+def plot_panel(fg, im):
     ax = fg.add_subplot(1, 4, 1)
     ax.imshow(im, cmap='gray_r', interpolation='none', origin='bottom')
     ax.set_title('original')

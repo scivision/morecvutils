@@ -1,11 +1,10 @@
 import cv2
 import numpy as np
-from typing import Tuple
 
 
 def doblob(
-    img: np.ndarray, blobdet, anno: bool = True
-) -> Tuple[np.ndarray, np.ndarray]:
+    img, blobdet, anno: bool = True
+) -> tuple:
     """
     img: can be RGB (MxNx3) or gray (MxN)
 

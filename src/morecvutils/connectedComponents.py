@@ -33,7 +33,7 @@ def doblob(img, blobdet, anno: bool = True) -> tuple:
 
 def setupblob(minarea: int, maxarea: int, mindist: int):
 
-    blobparam = cv2.SimpleBlobDetector_Params()
+    blobparam = cv2.SimpleBlobDetector_Params()  # type: ignore[attr-defined]
     blobparam.filterByArea = True
     blobparam.filterByColor = False
     blobparam.filterByCircularity = False
@@ -44,4 +44,4 @@ def setupblob(minarea: int, maxarea: int, mindist: int):
     blobparam.minArea = minarea
     blobparam.maxArea = maxarea
     # blobparam.minThreshold = 40 #we have already made a binary image
-    return cv2.SimpleBlobDetector_create(blobparam)
+    return cv2.SimpleBlobDetector_create(blobparam)  # type: ignore[attr-defined]

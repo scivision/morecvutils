@@ -1,4 +1,3 @@
-from __future__ import division, absolute_import
 import cv2
 from numpy import (
     dstack,
@@ -45,7 +44,7 @@ def draw_flow(img, flow, step=16, dtype=uint8):
     return vis
 
 
-def draw_hsv(mag, ang, dtype=uint8, fn=None):
+def draw_hsv(mag, ang, dtype=uint8, fn: str | None = None):
     """
     mag must be uint8, uint16, uint32 and 2-D
     ang is in radians (float)

@@ -11,16 +11,17 @@ from typing import Any
 import cv2
 
 
-def getaviprop(fn: Path) -> dict[str, Any]:
-    if isinstance(fn, (str, Path)):  # assuming filename
-        fn = Path(fn).expanduser()
-        if not fn.is_file():
-            raise FileNotFoundError(fn)
-        v = cv2.VideoCapture(str(fn))
-        if v is None:
-            raise OSError(f"could not read {fn}")
-    else:  # assuming cv2.VideoCapture object
-        v = fn
+def getaviprop(fn: str | Path) -> dict[str, Any]:
+    match fn:
+        case str() | Path():  # assuming filename
+            fn = Path(fn).expanduser()
+            if not fn.is_file():
+                raise FileNotFoundError(fn)
+            v = cv2.VideoCapture(str(fn))
+            if v is None:
+                raise OSError(f"could not read {fn}")
+        case _:  # assuming cv2.VideoCapture object
+            v = fn
 
     if not v.isOpened():
         raise OSError(f"cannot read {fn}  probable codec issue")

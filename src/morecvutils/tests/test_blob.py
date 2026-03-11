@@ -8,7 +8,7 @@ R = Path(__file__).parent
 
 
 def test_blob():
-    mb = pytest.importorskip('morecvutils.connectedComponents')
+    mb = pytest.importorskip("morecvutils.connectedComponents")
     im_good = np.zeros((32, 32), dtype=np.uint8)
     im_good[10:20, 10:20] = 255
 
@@ -28,15 +28,15 @@ def test_blob():
 
 
 def test_avi():
-    getaviprop = pytest.importorskip('morecvutils.getaviprop')
+    getaviprop = pytest.importorskip("morecvutils.getaviprop")
 
-    finf = getaviprop.getaviprop(R / 'data/bunny.avi')
+    finf = getaviprop.getaviprop(R / "data/bunny.avi")
 
-    assert finf['fps'] == approx(24.0)
-    assert finf['xy_pixel'] == (426, 240)
-    assert finf['nframe'] == 168
-    assert finf['codec'] == 'H264'
+    assert finf["fps"] == approx(24.0)
+    assert finf["xy_pixel"] == (426, 240)
+    assert finf["nframe"] == 168
+    assert finf["codec"] == "H264"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pytest.main([__file__])

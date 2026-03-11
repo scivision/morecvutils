@@ -22,12 +22,13 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-tests = ["pytest"]
-lint = ["flake8", "mypy"]
-plot = ["matplotlib", "seaborn"]
+tests = ["pytest", "mypy"]
+plot = ["matplotlib"]
 opencv = ["opencv-python"]
 
 [tool.mypy]
+files = ["."]
+install_types = true
+exclude = ["^build([/\\\\]|$)"]
 ignore_missing_imports = true
-strict_optional = false
 allow_redefinition = true

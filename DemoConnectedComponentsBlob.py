@@ -34,7 +34,7 @@ def gen_patterns(x: int, y: int, dtype=np.uint8, add_noise: float = 0.0):
     im[190:220:1, 120:200:1] = V
 
     if add_noise > 0:
-        im = random_noise(im, 's&p', amount=add_noise).astype('uint8') * V
+        im = random_noise(im, "s&p", amount=add_noise).astype("uint8") * V
 
     return im
 
@@ -45,13 +45,13 @@ def main():
     x = y = 256
 
     img_area = x * y
-    print(f'area of the {x} x {y} image is {img_area} pixels')
+    print(f"area of the {x} x {y} image is {img_area} pixels")
 
     # set some arbitrary parameters
     max_blob = img_area // 4
     min_blob = img_area // 1000
 
-    print(f'Minimum and maximum blob areas: {min_blob}, {max_blob}')
+    print(f"Minimum and maximum blob areas: {min_blob}, {max_blob}")
 
     im1 = gen_patterns(x, y, np.uint8, 0.0)
 
@@ -59,11 +59,11 @@ def main():
 
     labeled_img, label_sizes = doblob(im1, blob)
 
-    cv2.imshow('Labeled Image', labeled_img)
-    print('press any key to exit')
+    cv2.imshow("Labeled Image", labeled_img)
+    print("press any key to exit")
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

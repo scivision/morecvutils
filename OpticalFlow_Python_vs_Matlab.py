@@ -15,21 +15,21 @@ def plotflow(im, mag, matmag):
     for i in range(im.shape[0] - 1):
         if i == 0:
             hi = ax[0].imshow(mag[0, ...])
-            ax[0].set_title('Python optical flow mag')
+            ax[0].set_title("Python optical flow mag")
             fg.colorbar(hi, ax=ax[0])
 
             if matmag is not None:
                 hm = ax[1].imshow(matmag[0, ...])
-                ax[1].set_title('Matlab Optical flow mag')
+                ax[1].set_title("Matlab Optical flow mag")
                 fg.colorbar(hm, ax=ax[1])
 
-            hs = fg.suptitle('frame #')
+            hs = fg.suptitle("frame #")
         else:
             hi.set_data(mag[i, ...])
             if matmag is not None:
                 hm.set_data(matmag[i, ...])
 
-            hs.set_text('frame # {}'.format(i))
+            hs.set_text("frame # {}".format(i))
 
         draw()
         pause(0.001)
@@ -71,9 +71,8 @@ def setup(flist: list[Path]):
     return im, N, r, c
 
 
-if __name__ == '__main__':
-
-    flist = sorted(Path('tests/data').glob('*.png'))
+if __name__ == "__main__":
+    flist = sorted(Path("tests/data").glob("*.png"))
 
     im, N, r, c = setup(flist)
     # %% python

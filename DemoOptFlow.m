@@ -13,7 +13,7 @@ of = opticalFlowHS;
 flows = nan(size(I),'single');
 
 for i = 1:size(I,1)
-    
+
     F = estimateFlow(of, squeeze(I(i,:,:)));
     flows(i,:,:) = F.Magnitude;
 

@@ -27,7 +27,7 @@ def draw_flow(img, flow, step=16, dtype=uint8):
     # scaleFact = 1. #arbitary factor to make flow visible
     canno = (0, maxval, 0)  # green color
     h, w = img.shape[:2]
-    y, x = mgrid[step // 2: h: step, step // 2: w: step].reshape(2, -1)
+    y, x = mgrid[step // 2 : h : step, step // 2 : w : step].reshape(2, -1)
     fx, fy = flow[y, x].T
     # create line endpoints
     lines = vstack([x, y, (x + fx), (y + fy)]).T.reshape(-1, 2, 2)
@@ -64,7 +64,7 @@ def draw_hsv(mag, ang, dtype=uint8, fn=None):
     rgb = cv2.cvtColor(hsv, cv2.COLOR_HSV2RGB)
 
     if fn is not None:
-        print('writing ' + fn)
+        print("writing " + fn)
         cv2.imwrite(fn, rgb)
 
     return rgb  # , hsv
@@ -79,7 +79,7 @@ def flow2magang(flow, dtype=uint8):
 
 
 # %% selftest
-if __name__ == '__main__':
+if __name__ == "__main__":
     flow = array([[[55, pi / 4], [128, 3 * pi / 2]], [[123, pi / 2], [48, pi]]])
 
     mag, ang = flow2magang(flow, uint8)

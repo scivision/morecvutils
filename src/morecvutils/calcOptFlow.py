@@ -14,9 +14,7 @@ from numpy import asarray, dstack
 from pyoptflow import HornSchunck
 
 
-def optflowHornSchunk(
-    new, ref, uv, smoothing=0.01
-):
+def optflowHornSchunk(new, ref, uv, smoothing=0.01):
     if cv2 is not None:
         """
         http://docs.opencv.org/modules/legacy/doc/motion_analysis.html

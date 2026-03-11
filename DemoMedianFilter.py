@@ -5,9 +5,7 @@ from skimage.util import random_noise
 from matplotlib.pyplot import figure, show
 
 
-def gen_patterns(
-    x: int, y: int, dtype=np.uint8, noise: float = 0.0
-) -> tuple:
+def gen_patterns(x: int, y: int, dtype=np.uint8, noise: float = 0.0) -> tuple:
 
     if dtype == np.uint8:
         V = 255
@@ -33,9 +31,9 @@ def gen_patterns(
     im[21:24:2, 21:24:2] = V
 
     if noise > 0:
-        im = random_noise(im, 's&p', amount=noise).astype('uint8') * V
+        im = random_noise(im, "s&p", amount=noise).astype("uint8") * V
 
-    im2 = np.zeros((y, x), dtype='uint8')
+    im2 = np.zeros((y, x), dtype="uint8")
     im2[4:7, 4:7] = V
     im2[4, 8] = V
 
@@ -44,27 +42,27 @@ def gen_patterns(
 
 def plot_panel(fg, im):
     ax = fg.add_subplot(1, 4, 1)
-    ax.imshow(im, cmap='gray_r', interpolation='none', origin='bottom')
-    ax.set_title('original')
+    ax.imshow(im, cmap="gray_r", interpolation="none", origin="bottom")
+    ax.set_title("original")
 
     imfilt = cv2.medianBlur(im, 3)
 
     ax = fg.add_subplot(1, 4, 2)
-    ax.imshow(imfilt, cmap='gray_r', interpolation='none', origin='bottom')
-    ax.set_title('median filtered')
+    ax.imshow(imfilt, cmap="gray_r", interpolation="none", origin="bottom")
+    ax.set_title("median filtered")
 
     openrad = 3
     kern = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (openrad, openrad))
 
     ax = fg.add_subplot(1, 4, 3)
-    ax.imshow(cv2.erode(im, kern), cmap='gray_r', interpolation='none', origin='bottom')
-    ax.set_title('erosion')
+    ax.imshow(cv2.erode(im, kern), cmap="gray_r", interpolation="none", origin="bottom")
+    ax.set_title("erosion")
 
     ax = fg.add_subplot(1, 4, 4)
     ax.imshow(
-        cv2.erode(imfilt, kern), cmap='gray_r', interpolation='none', origin='bottom'
+        cv2.erode(imfilt, kern), cmap="gray_r", interpolation="none", origin="bottom"
     )
-    ax.set_title('erosion median filtered')
+    ax.set_title("erosion median filtered")
 
     # for a in ax:
     #   a.set_xlim((0, im.shape[1]))

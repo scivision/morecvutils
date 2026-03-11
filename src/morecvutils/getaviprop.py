@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
     p = ArgumentParser(description="get parameters of AVI file")
     p.add_argument("avifn", help="avi filename")
-    p = p.parse_args()
+    args = p.parse_args()
 
-    vidparam = getaviprop(p.avifn)
+    vidparam = getaviprop(args.avifn)
     print(vidparam)

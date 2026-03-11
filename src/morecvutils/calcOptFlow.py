@@ -4,18 +4,14 @@ Michael Hirsch
 Example calculations of optical flow, starting with Horn Schunk Optical Flow using OpenCV
 """
 
-try:
-    import cv2
-except ImportError:  # NOTE: openCV 3 has legacy code buried in opencv-extra
-    cv2 = None
-from numpy import asarray, dstack
+import numpy as np
 
-#
 from pyoptflow import HornSchunck
 
 
 def optflowHornSchunk(new, ref, uv, smoothing=0.01):
-    if cv2 is not None:
+    try:
+        import cv2
         """
         http://docs.opencv.org/modules/legacy/doc/motion_analysis.html
         Note that smoothness parameter for cv.CalcOpticalFlowHS needs to be SMALLER than matlab
@@ -36,10 +32,10 @@ def optflowHornSchunk(new, ref, uv, smoothing=0.01):
         )
 
         # reshape to numpy float32, xpix x ypix x 2
-        flow = dstack((asarray(uv[0]), asarray(uv[1])))
-    else:  # use Python method
+        flow = np.dstack((np.asarray(uv[0]), np.asarray(uv[1])))
+    except ImportError:
         u, v = HornSchunck(ref, new)
-        flow = dstack((u, v))
+        flow = np.dstack((u, v))
 
     return flow
 

@@ -1,7 +1,5 @@
-function flows = test_optflow(I)
-if verLessThan('matlab','R2015a')
-    error('this Python Matlab Engine demo requires Matlab >= R2015a')
-end
+function flows = DemoOptFlow(I)
+
 if nargin==0
     I = genuint8();
 end

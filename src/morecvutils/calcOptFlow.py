@@ -12,6 +12,7 @@ from pyoptflow import HornSchunck
 def optflowHornSchunk(new, ref, uv, smoothing=0.01):
     try:
         import cv2
+
         """
         http://docs.opencv.org/modules/legacy/doc/motion_analysis.html
         Note that smoothness parameter for cv.CalcOpticalFlowHS needs to be SMALLER than matlab

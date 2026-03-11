@@ -2,7 +2,6 @@
 import pytest
 import numpy as np
 from pytest import approx
-from pathlib import Path
 
 import importlib.resources as ir
 

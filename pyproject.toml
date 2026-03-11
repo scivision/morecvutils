@@ -4,7 +4,6 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "morecvutils"
-version = "1.0.2"
 description = "Computer Vision utilities, OpenCV plot helpers for Optical Flow and Blob Analysis, AVI codec helpers"
 requires-python = ">=3.10"
 keywords = ["computer vision", "opencv"]
@@ -16,10 +15,15 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Topic :: Scientific/Engineering :: Visualization"
 ]
+dynamic = ["readme", "version"]
 dependencies = [
     "numpy",
     "imageio"
 ]
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"], content-type = "text/markdown"}
+version = {attr = "morecvutils.__version__"}
 
 [project.optional-dependencies]
 tests = ["pytest", "mypy"]

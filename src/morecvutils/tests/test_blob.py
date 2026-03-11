@@ -4,7 +4,7 @@ import numpy as np
 from pytest import approx
 from pathlib import Path
 
-R = Path(__file__).parent
+import importlib.resources as ir
 
 
 def test_blob():
@@ -30,13 +30,9 @@ def test_blob():
 def test_avi():
     getaviprop = pytest.importorskip("morecvutils.getaviprop")
 
-    finf = getaviprop.getaviprop(R / "data/bunny.avi")
+    finf = getaviprop.getaviprop(ir.files("morecvutils.tests.data") / "bunny.avi")
 
     assert finf["fps"] == approx(24.0)
     assert finf["xy_pixel"] == (426, 240)
     assert finf["nframe"] == 168
-    assert finf["codec"] == "H264"
-
-
-if __name__ == "__main__":
-    pytest.main([__file__])
+    assert finf["codec"] == "h264"
